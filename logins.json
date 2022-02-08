@@ -1,0 +1,69 @@
+{
+    "Logins": [
+        {
+            "USERNAME": "new_user",
+            "EMAIL": [
+                "rumeza06@gmail.com"
+            ],
+            "PASSWORD": [
+                "bye"
+            ]
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                ""
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                ""
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                ""
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                ""
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                ""
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "",
+            "EMAIL": [
+                "dededded"
+            ],
+            "PASSWORD": ""
+        },
+        {
+            "USERNAME": "account",
+            "EMAIL": [
+                "test_account"
+            ],
+            "PASSWORD": "blah"
+        },
+        {
+            "USERNAME": "hi hellow",
+            "EMAIL": [
+                "fake email"
+            ],
+            "PASSWORD": "byee"
+        }
+    ]
+}

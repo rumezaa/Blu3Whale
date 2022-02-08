@@ -1,0 +1,20 @@
+{
+    "Logins": [
+        {
+            "USERNAME": "hello",
+            "EMAIL": [
+                "gmail"
+            ],
+            "PASSWORD": [
+                "hello"
+            ]
+        },
+        {
+            "USERNAME": "helko",
+            "EMAIL": [
+                "gmail"
+            ],
+            "PASSWORD": "new2pass"
+        }
+    ]
+}

@@ -1,0 +1,290 @@
+#:import utils kivy.utils
+
+
+TabManager:
+    SignUpScreen:
+    LoginScreen:
+    ForgotScreen:
+    HomeScreen:
+
+<HomeScreen>:
+    name: "Home"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        MDToolbar:
+            title: "Welcome"
+            right_action_items: [["account", lambda x: account_info.set_state("open")]]
+
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: "Recipe Screen"
+                icon: "bowl-mix"
+                MDCard:
+                    size_hint: None,None
+                    size: 300,400
+                    orientation: "vertical"
+                    padding:10
+                    spacing: 10
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    canvas.before:
+                        Color:
+                            rgba: utils.get_color_from_hex("#c6dcbe")
+                        RoundedRectangle:
+                            radius: [10]
+                            size: self.size
+                            pos: self.pos
+            MDBottomNavigationItem:
+                name: "Main Screen"
+                icon: "home"
+                MDCard:
+                    size_hint: None,None
+                    size: 300,400
+                    orientation: "vertical"
+                    padding:10
+                    spacing: 10
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    canvas.before:
+                        Color:
+                            rgba: utils.get_color_from_hex("#d9d2e9")
+                        RoundedRectangle:
+                            radius: [10]
+                            size: self.size
+                            pos: self.pos
+
+            MDBottomNavigationItem:
+                name: "Data Screen"
+                icon: "chart-bar"
+                MDCard:
+                    size_hint: None,None
+                    size: 300,400
+                    orientation: "vertical"
+                    padding:10
+                    spacing: 10
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    canvas.before:
+                        Color:
+                            rgba: utils.get_color_from_hex("#eeeeee")
+                        RoundedRectangle:
+                            radius: [10]
+                            size: self.size
+                            pos: self.pos
+    MDNavigationDrawer:
+        id: account_info
+        BoxLayout:
+            orientation:"vertical"
+            Image:
+                source: "Images/logo.png"
+                size: self.texture_size
+            ScrollView:
+                MDList:
+
+                    OneLineIconListItem:
+                        text: "settings"
+                        IconLeftWidget:
+                            icon:"cog"
+
+                    OneLineIconListItem:
+                        text: "logout"
+                        on_release: app.root.current = "Login"
+                        IconLeftWidget:
+                            icon:"logout"
+
+
+
+<SignUpScreen>:
+    name: "SignUp"
+    MDCard:
+        size_hint: None,None
+        size: 300,400
+        orientation: "vertical"
+        padding:10
+        spacing: 10
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex("#d9d2e9")
+            RoundedRectangle:
+                radius: [10]
+                size: self.size
+                pos: self.pos
+
+        MDIcon:
+            icon: "account"
+            halign: "center"
+            font_size: 220
+
+        MDTextFieldRound:
+            id: add_email
+            hint_text: "email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 210
+            pos_hint: {"center_x": 0.5}
+
+        MDTextFieldRound:
+            id: add_username
+            hint_text: "username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 210
+            pos_hint: {"center_x": 0.5}
+
+        MDTextFieldRound:
+            id: add_user_password
+            hint_text: "password"
+            icon_right: "eye-off"
+            icon_color: 1,1,1,1
+            size_hint_x: None
+            width: 210
+            password: True
+            pos_hint: {"center_x": 0.5}
+
+        MDFillRoundFlatButton:
+            id: loggedIn
+            text: "Sign Up"
+            pos_hint: {"center_x": 0.5}
+            on_press: root.signUp()
+
+
+
+        MDFillRoundFlatButton:
+            id: loggedIn
+            text: "I have an Account"
+            pos_hint: {"center_x": 0.5}
+            on_press: app.root.current="Login"
+
+
+
+
+
+
+<LoginScreen>:
+    name: "Login"
+    MDCard:
+        size_hint: None,None
+        size: 300,400
+        orientation: "vertical"
+        spacing: 5
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex("#d9d2e9")
+            RoundedRectangle:
+                radius: [10]
+                size: self.size
+                pos: self.pos
+
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding:2
+            spacing: 10
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            MDIcon:
+                icon: "account"
+                halign: "center"
+                font_size: 220
+                theme_icon_color: "Custom"
+                icon_color: 1, 0, 0, 1
+            MDTextFieldRound:
+                id: username
+                hint_text: "username"
+                icon_right: "account"
+                size_hint_x: None
+                width: 210
+                pos_hint: {"center_x": 0.5}
+
+            MDTextFieldRound:
+                id: user_password
+                hint_text: "password"
+                icon_right: "eye-off"
+                size_hint_x: None
+                width: 210
+                password: True
+                pos_hint: {"center_x": 0.5}
+
+
+            MDFillRoundFlatButton:
+                id: loggedIn
+                text: "login"
+                pos_hint: {"center_x": 0.5}
+                on_press: root.login()
+
+            MDTextButton:
+                id: forgot_pass
+                text: "FORGOT PASSWORD"
+                font_size: "12"
+                custom_color: 0,1,0,1
+                pos_hint: {"center_x": 0.5}
+                on_press: app.root.current="Forgot"
+
+            MDTextButton:
+                id: new_account
+                text: "NEW ACCOUNT"
+                font_size: "12"
+                pos_hint: {"center_x": 0.5}
+                on_press: app.root.current="SignUp"
+            Widget:
+                size_hint: None,None
+                size: 10,20
+<ForgotScreen>:
+    name: "Forgot"
+
+    MDCard:
+        size_hint: None,None
+        size: 300,400
+        orientation: "vertical"
+        padding:10
+        spacing: 10
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex("#d9d2e9")
+            RoundedRectangle:
+                radius: [10]
+                size: self.size
+                pos: self.pos
+
+        MDIcon:
+            icon: "account"
+            halign: "center"
+            font_size: 220
+
+        MDTextFieldRound:
+            id: _username
+            hint_text: "username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 210
+            pos_hint: {"center_x": 0.5}
+
+        MDTextFieldRound:
+            id: new_password
+            hint_text: "new password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 210
+            password: True
+            pos_hint: {"center_x": 0.5}
+
+        MDFillRoundFlatButton:
+            id: loggedIn
+            text: "Change password"
+            pos_hint: {"center_x": 0.5}
+            on_press: root.forgot_pass()
+
+        Widget:
+            size_hint: None,None
+            size: 10,40
+
+
+
+
+
+
+
+
