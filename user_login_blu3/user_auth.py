@@ -10,6 +10,7 @@ class UserLogin:
         self.email = email
         self.username = username
         self.password = password
+
         self.login_data = {
             'Logins': []
         }
@@ -51,6 +52,7 @@ class UserLogin:
         self.get_pass = "".join([retrieve["PASSWORD"][0] for i,retrieve
                             in enumerate(self.filter_data)
                             if retrieve["USERNAME"]==self.username])
+
         if self.get_pass==self.password:
 
             print("logged in")
@@ -62,7 +64,7 @@ class UserLogin:
 
 
     def change_pass(self,*newpass):
-        self.newpass=newpass
+        self.newpass = newpass
         update_pass = [retrieve.update({"PASSWORD":self.newpass})
                        for i,retrieve in enumerate(self.filter_data)
                        if retrieve["USERNAME"]==self.username]

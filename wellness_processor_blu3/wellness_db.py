@@ -68,6 +68,5 @@ class WellnessTrack:
 
 
 
-print(WellnessTrack("testuser").retrieve_DB())
 
 

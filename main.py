@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import kivy.garden.matplotlib.backend_kivyagg as file
-
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -52,7 +50,7 @@ class ForgotScreen(Screen):
     def forgot_pass(self):
         #collect user info
         username = self.ids._username.text
-        email = "".join(UserLogin(username,"").get_email())
+        email = UserLogin(username,"").get_email()
 
         new_pass = self.ids.new_password.text
         new_info= UserLogin(username,"",email).change_pass(new_pass)
@@ -64,13 +62,11 @@ class ForgotScreen(Screen):
         #go to homescreen
         self.parent.current = "Home"
 
-
-
-
 class HomeScreen(Screen):
     pass
 class TabManager(ScreenManager):
     pass
+
 class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
