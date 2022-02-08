@@ -33,7 +33,6 @@ class SignUpScreen(Screen):
 class LoginScreen(Screen):
     def login(self):
 
-
         # retrieve user info
         username = self.ids.username.text
         password = self.ids.user_password.text
@@ -50,7 +49,8 @@ class ForgotScreen(Screen):
     def forgot_pass(self):
         #collect user info
         username = self.ids._username.text
-        email = UserLogin(username,"").get_email()
+        email = "".join(UserLogin(username,"").get_email())
+
 
         new_pass = self.ids.new_password.text
         new_info= UserLogin(username,"",email).change_pass(new_pass)
@@ -62,6 +62,8 @@ class ForgotScreen(Screen):
         #go to homescreen
         self.parent.current = "Home"
 
+
+#other stuff
 class HomeScreen(Screen):
     pass
 class TabManager(ScreenManager):
