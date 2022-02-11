@@ -9,4 +9,4 @@ blu3whale aims to create an immersive environment for those recovering from an e
 
 
 
-Python based GUI - Kivy, along with natural langauge processing implementation, an extetive recipe search interface using the mealDB api and much more!
+Python based GUI - Kivy, along with natural langauge processing implementation, an extensive recipe search interface using the mealDB api and much more!
