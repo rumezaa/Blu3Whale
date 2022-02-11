@@ -1,0 +1,108 @@
+[INFO   ] Logger: Record log in C:\Users\rumeza\.kivy\logs\kivy_22-02-06_56.txt
+[INFO   ] deps: Successfully imported "kivy_deps.angle" 0.3.1
+[INFO   ] deps: Successfully imported "kivy_deps.glew" 0.3.0
+[INFO   ] deps: Successfully imported "kivy_deps.sdl2" 0.3.1
+[INFO   ] Kivy: v2.0.0
+[INFO   ] Kivy: Installed at "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\__init__.py"
+[INFO   ] Python: v3.9.4 (tags/v3.9.4:1f2e308, Apr  6 2021, 13:40:21) [MSC v.1928 64 bit (AMD64)]
+[INFO   ] Python: Interpreter at "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\python.exe"
+[INFO   ] Logger: Purge log fired. Analysing...
+[INFO   ] Logger: Purge 21 log files
+[INFO   ] Logger: Purge finished!
+[INFO   ] KivyMD: 0.104.2, git-bc7d1f5, 2021-06-06 (installed at "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivymd\__init__.py")
+[INFO   ] Factory: 186 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[INFO   ] Text: Provider: sdl2
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the "OpenGL" graphics system
+[INFO   ] GL: GLEW initialization succeeded
+[INFO   ] GL: Backend used <glew>
+[INFO   ] GL: OpenGL version <b'4.6.0 - Build 30.0.100.9865'>
+[INFO   ] GL: OpenGL vendor <b'Intel'>
+[INFO   ] GL: OpenGL renderer <b'Intel(R) HD Graphics 510'>
+[INFO   ] GL: OpenGL parsed version: 4, 6
+[INFO   ] GL: Shading version <b'4.60 - Build 30.0.100.9865'>
+[INFO   ] GL: Texture max size <16384>
+[INFO   ] GL: Texture max units <32>
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] GL: NPOT texture support is available
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 242, in create_handler
+[WARNING] stderr:     return eval(value, idmap), bound_list
+[WARNING] stderr:   File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255, in <module>
+[WARNING] stderr:     screen_manager: screen_manager
+[WARNING] stderr: NameError: name 'screen_manager' is not defined
+[WARNING] stderr: 
+[WARNING] stderr: During handling of the above exception, another exception occurred:
+[WARNING] stderr: 
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 695, in _apply_rule
+[WARNING] stderr:     value, bound = create_handler(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 245, in create_handler
+[WARNING] stderr:     raise BuilderException(rule.ctx, rule.line,
+[WARNING] stderr: kivy.lang.builder.BuilderException: Parser: File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255:
+[WARNING] stderr: ...
+[WARNING] stderr:     253:#                            icon:"logout"
+[WARNING] stderr:     254:        ContentNavigationDrawer:
+[WARNING] stderr: >>  255:            screen_manager: screen_manager
+[WARNING] stderr:     256:            nav_drawer: nav_drawer
+[WARNING] stderr:     257:
+[WARNING] stderr: ...
+[WARNING] stderr: NameError: name 'screen_manager' is not defined
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 242, in create_handler
+[WARNING] stderr:     return eval(value, idmap), bound_list
+[WARNING] stderr:   File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255, in <module>
+[WARNING] stderr:     screen_manager: screen_manager
+[WARNING] stderr: 
+[WARNING] stderr: 
+[WARNING] stderr: During handling of the above exception, another exception occurred:
+[WARNING] stderr: 
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "C:\Users\rumeza\PycharmProjects\pythonProject\main.py", line 74, in <module>
+[WARNING] stderr:     blu3whaleApp().run()
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\app.py", line 949, in run
+[WARNING] stderr:     self._run_prepare()
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\app.py", line 919, in _run_prepare
+[WARNING] stderr:     root = self.build()
+[WARNING] stderr:   File "C:\Users\rumeza\PycharmProjects\pythonProject\main.py", line 71, in build
+[WARNING] stderr:     return Builder.load_file("GUI.kv")
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 306, in load_file
+[WARNING] stderr:     return self.load_string(data, **kwargs)
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 408, in load_string
+[WARNING] stderr:     self._apply_rule(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 661, in _apply_rule
+[WARNING] stderr:     child.apply_class_lang_rules(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\uix\widget.py", line 463, in apply_class_lang_rules
+[WARNING] stderr:     Builder.apply(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 541, in apply
+[WARNING] stderr:     self._apply_rule(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 710, in _apply_rule
+[WARNING] stderr:     raise BuilderException(rule.ctx, rule.line,
+[WARNING] stderr: kivy.lang.builder.BuilderException: Parser: File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255:
+[WARNING] stderr: ...
+[WARNING] stderr:     253:#                            icon:"logout"
+[WARNING] stderr:     254:        ContentNavigationDrawer:
+[WARNING] stderr: >>  255:            screen_manager: screen_manager
+[WARNING] stderr:     256:            nav_drawer: nav_drawer
+[WARNING] stderr:     257:
+[WARNING] stderr: ...
+[WARNING] stderr: BuilderException: Parser: File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255:
+[WARNING] stderr: ...
+[WARNING] stderr:     253:#                            icon:"logout"
+[WARNING] stderr:     254:        ContentNavigationDrawer:
+[WARNING] stderr: >>  255:            screen_manager: screen_manager
+[WARNING] stderr:     256:            nav_drawer: nav_drawer
+[WARNING] stderr:     257:
+[WARNING] stderr: ...
+[WARNING] stderr: NameError: name 'screen_manager' is not defined
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 242, in create_handler
+[WARNING] stderr:     return eval(value, idmap), bound_list
+[WARNING] stderr:   File "C:\Users\rumeza\PycharmProjects\pythonProject\GUI.kv", line 255, in <module>
+[WARNING] stderr:     screen_manager: screen_manager
+[WARNING] stderr: 
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 695, in _apply_rule
+[WARNING] stderr:     value, bound = create_handler(
+[WARNING] stderr:   File "C:\Users\rumeza\AppData\Local\Programs\Python\Python39\lib\site-packages\kivy\lang\builder.py", line 245, in create_handler
+[WARNING] stderr:     raise BuilderException(rule.ctx, rule.line,
+[WARNING] stderr: 
