@@ -2,7 +2,7 @@ import smtplib
 import os
 import json
 from email.message import*
-import numpy as np
+
 
 
 class UserLogin:
@@ -19,23 +19,22 @@ class UserLogin:
             "EMAIL": self.email,
             "PASSWORD": self.password,}
 
-        #get json data
-        with open("logins.json",'r') as read:
+
+        with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json",'r') as read:
             self.data=json.load(read)
+
         #filter data
         self.filter_data =self.data['Logins']
-
-
 
     def sign_up(self):
         #try opening json file
         try:
-            with open("logins.json","r") as file:
+            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","r") as file:
                 json_data=json.load(file)
 
         #if file nonexsistant, write data
         except:
-            with open("logins.json","w") as file:
+            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
                 self.login_data['Logins'].append(self.user_data), file
                 json.dump(self.login_data,file,indent=4)
 
@@ -43,24 +42,26 @@ class UserLogin:
         else:
             json_data['Logins'].append(self.user_data)
 
-            with open("logins.json","w") as file:
+            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
                 json.dump(json_data,file,indent=4)
 
 
     def sign_in(self):
         #get the password
-        self.get_pass = "".join([retrieve["PASSWORD"][0] for i,retrieve
-                            in enumerate(self.filter_data)
-                            if retrieve["USERNAME"]==self.username])
+        for i, retrieve in enumerate(self.filter_data):
+            search = retrieve['USERNAME']
+            # once username found, retrieve password
+            if search == self.username:
+                passw = "".join(retrieve['PASSWORD'])
 
-        if self.get_pass==self.password:
+                # if password matches return true
+                if passw == self.password:
+                    print("logged in")
+                    return True
 
-            print("logged in")
-            return True
-
-        else:
-            print("wrong password")
-            return False
+                else:
+                    print("wrong password")
+                    return False
 
 
     def change_pass(self,*newpass):
@@ -69,7 +70,7 @@ class UserLogin:
                        for i,retrieve in enumerate(self.filter_data)
                        if retrieve["USERNAME"]==self.username]
 
-        with open("logins.json","w") as file:
+        with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
             json.dump(self.data,file,indent=4)
 
 
@@ -105,9 +106,10 @@ class UserLogin:
             #once username found, retrieve password
             if search == self.username:
                 self.email = read["EMAIL"]
-                return self.email
+                email = "".join(self.email)
+                return email
 
 
 
-
+UserLogin("fake_test","cats123").sign_in()
 

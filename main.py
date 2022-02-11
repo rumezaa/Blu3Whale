@@ -1,14 +1,13 @@
 import matplotlib.pyplot as plt
 from kivy.lang import Builder
+import matplotlib.pyplot as plt
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-
 from user_login_blu3.user_auth import UserLogin
-
-
-
+from backend_kivyagg import FigureCanvasKivyAgg
+import numpy as np
 
 
 #let user create an account
@@ -29,6 +28,7 @@ class SignUpScreen(Screen):
             self.ids.add_username.text = ""
             self.ids.add_user_password.text = ""
             self.parent.current = "Home"
+
 #let user login
 class LoginScreen(Screen):
     def login(self):
@@ -44,12 +44,14 @@ class LoginScreen(Screen):
         if signed_in==True:
             self.parent.current="Home"
 
+
 # for updating user's password
 class ForgotScreen(Screen):
     def forgot_pass(self):
         #collect user info
         username = self.ids._username.text
-        email = "".join(UserLogin(username,"").get_email())
+        email = UserLogin(username,"").get_email()
+
 
 
         new_pass = self.ids.new_password.text
@@ -64,8 +66,11 @@ class ForgotScreen(Screen):
 
 
 #other stuff
+
+
 class HomeScreen(Screen):
     pass
+
 class TabManager(ScreenManager):
     pass
 
@@ -76,7 +81,9 @@ class ContentNavigationDrawer(MDBoxLayout):
 
 class blu3whaleApp(MDApp):
     def build(self):
+
         self.theme_cls.primary_palette ="DeepPurple"
+
         return Builder.load_file("GUI.kv")
 
 

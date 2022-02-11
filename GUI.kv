@@ -7,6 +7,14 @@ TabManager:
     ForgotScreen:
     HomeScreen:
 
+
+
+
+
+
+
+
+
 <HomeScreen>:
     name: "Home"
     BoxLayout:
@@ -35,10 +43,13 @@ TabManager:
                             radius: [10]
                             size: self.size
                             pos: self.pos
+
             MDBottomNavigationItem:
                 name: "Main Screen"
                 icon: "home"
+
                 MDCard:
+
                     size_hint: None,None
                     size: 300,400
                     orientation: "vertical"
@@ -56,7 +67,9 @@ TabManager:
             MDBottomNavigationItem:
                 name: "Data Screen"
                 icon: "chart-bar"
+
                 MDCard:
+                    id: create_graph
                     size_hint: None,None
                     size: 300,400
                     orientation: "vertical"
@@ -70,6 +83,8 @@ TabManager:
                             radius: [10]
                             size: self.size
                             pos: self.pos
+
+
     MDNavigationDrawer:
         id: account_info
         BoxLayout:

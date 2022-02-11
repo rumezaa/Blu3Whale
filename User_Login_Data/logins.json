@@ -1,0 +1,22 @@
+{
+    "Logins": [
+        {
+            "USERNAME": "new_user",
+            "EMAIL": [
+                "rumezaf1@educbe.ca"
+            ],
+            "PASSWORD": [
+                "newpass"
+            ]
+        },
+        {
+            "USERNAME": "dogs123",
+            "EMAIL": [
+                "rumeza06@gmail.com"
+            ],
+            "PASSWORD": [
+                "changepass"
+            ]
+        }
+    ]
+}

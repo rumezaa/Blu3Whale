@@ -7,6 +7,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from datetime import datetime
 import numpy as np
 
+
 class WellnessTrack:
     def __init__(self,username):
         self.username = username
