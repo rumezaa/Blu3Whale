@@ -11,13 +11,7 @@ class UserLogin:
         self.username = username
         self.password = password
 
-        self.login_data = {
-            'Logins': []
-        }
-        self.user_data = {
-            "USERNAME": self.username,
-            "EMAIL": self.email,
-            "PASSWORD": self.password,}
+
 
 
         with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json",'r') as read:
@@ -27,6 +21,14 @@ class UserLogin:
         self.filter_data =self.data['Logins']
 
     def sign_up(self):
+        self.login_data = {
+            'Logins': []
+        }
+        self.user_data = {
+            "USERNAME": self.username,
+            "EMAIL": self.email,
+            "PASSWORD": self.password,
+            "GRAPH": False}
         #try opening json file
         try:
             with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","r") as file:
@@ -109,7 +111,12 @@ class UserLogin:
                 email = "".join(self.email)
                 return email
 
+    def get_newusers(self):
+        bool_graph = [retrieve["GRAPH"] for i,retrieve in enumerate(self.filter_data)
+                       if retrieve["USERNAME"]==self.username]
+        return bool_graph
 
 
-UserLogin("fake_test","cats123").sign_in()
+
+
 

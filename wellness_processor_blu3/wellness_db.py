@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import nltk
 import csv
 import pandas
@@ -14,22 +15,31 @@ class WellnessTrack:
 
 
 
-    def create_DB(self):
+    def create_DB(self,*categories):
         con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        self.categories = list(categories)
+        self.categ = ["date","mood"]
+
+        self.categ.extend(self.categories)
+        self.categ = tuple(self.categ)
         cur = con.cursor()
         # Create table
-        cur.execute('''CREATE TABLE wellness_data
-                       (date text, water_drank text, active bool, mood text)''')
+        cur.execute(f'''CREATE TABLE wellness_data
+                       {self.categ}''')
 
         # Save changes
         con.commit()
        # secure connection
         con.close()
-    def update_DB(self,water_intake,active,sentiment):
-        self.h2o = water_intake
-        self.activity = active
+
+    def update_DB(self,sentiment,*input):
+        self.input = input
+        self.input = list(self.input)
+
         self.date = datetime.now().date()
+
         self.sentiment = sentiment
+
 
         #sentiment analysis
         self.classify = SentimentIntensityAnalyzer()
@@ -39,9 +49,11 @@ class WellnessTrack:
         con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
         cur = con.cursor()
         # Create table
-        data = (self.date, self.h2o, self.activity, self.mood)
+        data = [self.date,self.mood]
+        data.extend(self.input)
+
         # Create table
-        cur.execute("INSERT INTO wellness_data VALUES(?,?,?,?)", data)
+        cur.execute(f"INSERT INTO wellness_data VALUES (?,?,?,?,?)", data)
 
         # save changes
         con.commit()
@@ -58,13 +70,34 @@ class WellnessTrack:
         db_data=cur.fetchall()
 
         # extract db data values
-        dates =[dates[0] for dates in db_data ]
-        water_intake =  [water[1] for water in db_data]
-        activity = [active[2] for active in db_data]
-        mood_status = [float(mood[3]) for mood in db_data if float(mood[3])>=0]
+        dates = [dates[0] for dates in db_data ]
+
+        mood_status = [float(mood[1]) for mood in db_data if float(mood[1])!=0]
+
+        cat_1 = [cat_1[2] for cat_1 in db_data]
+        cat_2 = [cat_2[3] for cat_2 in db_data]
+        cat_3 = [cat_3[4] for cat_3 in db_data]
+
         avg_mood = sum(mood_status) / len(mood_status)
 
-        return dates, water_intake, activity, round(avg_mood,4)
+        return dates, round(avg_mood,4), sum(cat_1), sum(cat_2),sum(cat_3)
+
+    def create_visual(self):
+        # fetching the headers
+        con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        cursor = con.cursor()
+
+        cursor.execute('''Select * from wellness_data''')
+        headers = [i[0] for i in cursor.description]
+        categories = self.retrieve_DB()
+        labels = headers
+
+        #creat graph
+        plt.pie(categories,labels=headers)
+        plt.axis("equal")
+        plt.show()
+
+
 
 
 

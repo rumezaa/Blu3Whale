@@ -8,7 +8,21 @@ TabManager:
     HomeScreen:
 
 
-
+<Card>:
+    id: create_graph
+    size_hint: None,None
+    size: 300,400
+    orientation: "vertical"
+    padding:10
+    spacing: 10
+    pos_hint: {"center_x":0.5,"center_y":0.5}
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#eeeeee")
+        RoundedRectangle:
+            radius: [10]
+            size: self.size
+            pos: self.pos
 
 
 
@@ -49,7 +63,7 @@ TabManager:
                 icon: "home"
 
                 MDCard:
-
+                    id: home
                     size_hint: None,None
                     size: 300,400
                     orientation: "vertical"
@@ -64,25 +78,13 @@ TabManager:
                             size: self.size
                             pos: self.pos
 
+
             MDBottomNavigationItem:
                 name: "Data Screen"
                 icon: "chart-bar"
+                Card:
 
-                MDCard:
-                    id: create_graph
-                    size_hint: None,None
-                    size: 300,400
-                    orientation: "vertical"
-                    padding:10
-                    spacing: 10
-                    pos_hint: {"center_x":0.5,"center_y":0.5}
-                    canvas.before:
-                        Color:
-                            rgba: utils.get_color_from_hex("#eeeeee")
-                        RoundedRectangle:
-                            radius: [10]
-                            size: self.size
-                            pos: self.pos
+
 
 
     MDNavigationDrawer:
@@ -227,6 +229,9 @@ TabManager:
                 text: "login"
                 pos_hint: {"center_x": 0.5}
                 on_press: root.login()
+
+
+
 
             MDTextButton:
                 id: forgot_pass

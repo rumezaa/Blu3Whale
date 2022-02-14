@@ -1,22 +1,68 @@
 {
     "Logins": [
         {
-            "USERNAME": "new_user",
+            "USERNAME": "newacc",
             "EMAIL": [
-                "rumezaf1@educbe.ca"
+                "rumeza06@educbe.ca"
             ],
-            "PASSWORD": [
-                "newpass"
-            ]
+            "PASSWORD": "okay",
+            "GRAPH": true
         },
         {
-            "USERNAME": "dogs123",
+            "USERNAME": "hi",
             "EMAIL": [
-                "rumeza06@gmail.com"
+                "ddde"
             ],
-            "PASSWORD": [
-                "changepass"
-            ]
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "new2",
+            "EMAIL": [
+                "fakeemail"
+            ],
+            "PASSWORD": "heyo",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "sddsds",
+            "EMAIL": [
+                "sdds"
+            ],
+            "PASSWORD": "dsdsds",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "dssdsd",
+            "EMAIL": [
+                "sdsd"
+            ],
+            "PASSWORD": "dsdsds",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "fbfd",
+            "EMAIL": [
+                "fdfd"
+            ],
+            "PASSWORD": "fdfdb",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "gsbd",
+            "EMAIL": [
+                "gfb"
+            ],
+            "PASSWORD": "ggs",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "grbtzb",
+            "EMAIL": [
+                "rgtza"
+            ],
+            "PASSWORD": "zxr ",
+            "GRAPH": false
         }
     ]
 }
