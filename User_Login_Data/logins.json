@@ -14,7 +14,7 @@
                 "ddde"
             ],
             "PASSWORD": "hi",
-            "GRAPH": false
+            "GRAPH": true
         },
         {
             "USERNAME": "new2",

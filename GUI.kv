@@ -1,24 +1,32 @@
 #:import utils kivy.utils
 
-
 TabManager:
     SignUpScreen:
     LoginScreen:
     ForgotScreen:
     HomeScreen:
+    Search:
+
+<Categories>
+    on_release: root.set_check(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
 
 
-<Card>:
-    id: create_graph
+
+#for decorating
+<ElementCard@BoxLayout>:
+    orientation:"vertical"
     size_hint: None,None
-    size: 300,400
-    orientation: "vertical"
-    padding:10
-    spacing: 10
-    pos_hint: {"center_x":0.5,"center_y":0.5}
+    size: 100,160
+    padding:30
+    spacing: 30
+#    pos_hint: {"center_x":0.5,"center_y":0.5}
     canvas.before:
         Color:
-            rgba: utils.get_color_from_hex("#eeeeee")
+            rgba: utils.get_color_from_hex("#eaccff")
         RoundedRectangle:
             radius: [10]
             size: self.size
@@ -27,11 +35,12 @@ TabManager:
 
 
 
-
-
 <HomeScreen>:
     name: "Home"
+    on_enter: root.customize(root.manager.get_screen("Login").ids.username.text)
+
     BoxLayout:
+        id: box
         orientation: "vertical"
         size: root.width, root.height
         MDToolbar:
@@ -43,12 +52,14 @@ TabManager:
             MDBottomNavigationItem:
                 name: "Recipe Screen"
                 icon: "bowl-mix"
+
                 MDCard:
+                    id: recipie_card
+
                     size_hint: None,None
                     size: 300,400
-                    orientation: "vertical"
-                    padding:10
-                    spacing: 10
+#                    padding:10
+#                    spacing: 3
                     pos_hint: {"center_x":0.5,"center_y":0.5}
                     canvas.before:
                         Color:
@@ -57,12 +68,24 @@ TabManager:
                             radius: [10]
                             size: self.size
                             pos: self.pos
+                    MDGridLayout:
+                        halign: "center"
+                        cols: 2
+                        spacing: 30
+                        padding: 30
+                        ElementCard:
+                            MDFillRoundFlatIconButton:
+                                on_press: app.root.current = "SearchRecipies"
+                                pos_hint: {"center_x":0.5,"center_y":0.5}
+                        ElementCard:
+                        ElementCard:
+                        ElementCard:
 
             MDBottomNavigationItem:
                 name: "Main Screen"
                 icon: "home"
 
-                MDCard:
+                BoxLayout:
                     id: home
                     size_hint: None,None
                     size: 300,400
@@ -79,13 +102,27 @@ TabManager:
                             pos: self.pos
 
 
+
+
             MDBottomNavigationItem:
                 name: "Data Screen"
                 icon: "chart-bar"
-                Card:
 
-
-
+                BoxLayout:
+                    id: create_graph
+                    size_hint: None,None
+                    size: 300,400
+                    orientation: "vertical"
+                    padding:10
+                    spacing: 10
+                    pos_hint: {"center_x":0.5,"center_y":0.5}
+                    canvas.before:
+                        Color:
+                            rgba: utils.get_color_from_hex("#eeeeee")
+                        RoundedRectangle:
+                            radius: [10]
+                            size: self.size
+                            pos: self.pos
 
     MDNavigationDrawer:
         id: account_info
@@ -110,6 +147,53 @@ TabManager:
 
 
 
+#recipe search screen
+<Search>:
+    name: "SearchRecipies"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        spacing: 20
+        MDToolbar:
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: "recipe_search"
+                icon: "magnify"
+                BoxLayout:
+                    orientation: "vertical"
+                    spacing: 20
+                    padding: 20
+                    MDTextFieldRound:
+                        id: search_input
+                        height: 50
+                        pos_hint:{"center_x":0.5}
+                        hint_text: 'search a food'
+                        hint_text_color: 1,1,1,1
+                        icon_left: 'magnify'
+                        helper_text: "Search"
+                        size_hint_x: None
+                        width: 150
+                        font_size: 16
+                        active_line: False
+                        multiline: False
+                        on_text_validate: root.get_search()
+                    ScrollView:
+                        Recipe:
+                            id: recipe_view
+                            cols: 1
+                            row_default_height: (self.width - self.cols*self.spacing[0]) / self.cols
+                            row_force_default: True
+                            adaptive_height: True
+                            padding: dp(4), dp(4)
+                            spacing: dp(20)
+            MDBottomNavigationItem:
+                name: "info"
+                icon: "calender-blank"
+
+
+#signup screen
 <SignUpScreen>:
     name: "SignUp"
     MDCard:
@@ -176,7 +260,7 @@ TabManager:
 
 
 
-
+#loginscreen
 <LoginScreen>:
     name: "Login"
     MDCard:
@@ -231,8 +315,6 @@ TabManager:
                 on_press: root.login()
 
 
-
-
             MDTextButton:
                 id: forgot_pass
                 text: "FORGOT PASSWORD"
@@ -252,6 +334,7 @@ TabManager:
                 size: 10,20
 
 
+#forgot password
 <ForgotScreen>:
     name: "Forgot"
 

@@ -1,6 +1,6 @@
 create logins\/signup
-homescreen
-navbar
-ssearchrecipies
-
-
+homescreen --- just designs left
+navbar -- done!
+ssearchrecipies -- done!
+medals?? -- ??
+tracker -- basically done
