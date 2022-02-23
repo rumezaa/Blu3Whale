@@ -6,14 +6,16 @@
                 "rumeza06@educbe.ca"
             ],
             "PASSWORD": "okay",
-            "GRAPH": true
+            "GRAPH": false
         },
         {
             "USERNAME": "hi",
             "EMAIL": [
                 "ddde"
             ],
-            "PASSWORD": "hi",
+            "PASSWORD": [
+                "bye"
+            ],
             "GRAPH": true
         },
         {
@@ -62,6 +64,14 @@
                 "rgtza"
             ],
             "PASSWORD": "zxr ",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "milktoast",
+            "EMAIL": [
+                "rumeza@educbe.ca"
+            ],
+            "PASSWORD": "hi",
             "GRAPH": false
         }
     ]

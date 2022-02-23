@@ -1,4 +1,5 @@
 #mainimports
+
 import json
 import kivy
 import kivymd
@@ -39,6 +40,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.textfield import MDTextField
 from kivy.clock import Clock
+from kivy.core.window import Window
 
 
 #backend
@@ -47,6 +49,12 @@ from user_login_blu3.user_auth import UserLogin
 from recipie_finder_blu3.recipe import RecipeFinder
 import matplotlib.pyplot as plt
 import numpy as np
+
+
+Window.size = (380,580)
+
+
+
 
 #stuff
 class Content(MDBoxLayout):
@@ -119,14 +127,17 @@ class ForgotScreen(Screen):
 
 
         new_pass = self.ids.new_password.text
-        new_info= UserLogin(username,"",email).change_pass(new_pass)
+        try:
+            new_info= UserLogin(username,"",email).change_pass(new_pass)
 
         # clear inputs
-        self.ids._username.text = ""
-        self.ids.new_password.text = ""
+            self.ids._username.text = ""
+            self.ids.new_password.text = ""
 
         #go to homescreen
-        self.parent.current = "Home"
+            self.parent.current = "Home"
+        except:
+            print("username incorrect")
 
 
 #carries our basic graph funcs
@@ -244,6 +255,7 @@ class HomeScreen(Screen):
 
     #updating our graph data with user input
     def add(self,user,cat_1,cat_2,cat_3,cat_4):
+
         WellnessTrack(user).update_DB(cat_1,cat_2,cat_3,cat_4)
         self.ids.create_graph.clear_widgets()
         self.show_tracker(user)
@@ -263,6 +275,7 @@ class HomeScreen(Screen):
 class Search(Screen):
     def get_search(self):
         self.input = self.ids.search_input.text
+        self.ids.scrollview.scroll_y = 1
 
         if self.input != ():
             #checking to see if query is a NoneType
@@ -282,15 +295,15 @@ class Search(Screen):
                 for add in range(self.length):
                     print("working")
                     View.source = f"{self.img[add]}"
+                    View.markup = True
                     View.text = f"[size=26]{self.titles[add]}[/size]"
                     Instrucs.text = f"INSTRUCTIONS:\n{self.instrucs[add]}"
                     self.ids.recipe_view.add_widget(View())
 
-                    self.ids.recipe_view.add_widget(MDLabel(text=f"INGREDIENTS:\n{self.ingred[add]}",
-                                                            font_style="Caption"))
+                    self.ids.recipe_view.add_widget(MDLabel(markup=True,text=f"INGREDIENTS:\n[size=9sp]{self.ingred[add]}[/size]"))
 
-                    self.ids.recipe_view.add_widget(MDLabel(text=f"INSTRUCTIONS:\n{self.instrucs[add]}",
-                                                            font_style="Caption"))
+                    self.ids.recipe_view.add_widget(MDLabel(markup=True,text=f"INSTRUCTIONS:\n[size=10sp]{self.instrucs[add]}[/size]"))
+
             #if query is a nonetype display error
             except:
                 self.ids.recipe_view.clear_widgets()
@@ -317,9 +330,6 @@ class blu3whaleApp(MDApp):
 
     def build(self):
 
-
-        self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
-        self.theme_cls.primary_hue = "100"  # "500"
 
         return Builder.load_file("GUI.kv")
 
