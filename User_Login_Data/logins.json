@@ -14,65 +14,10 @@
                 "ddde"
             ],
             "PASSWORD": [
-                "bye"
+                "hi"
             ],
             "GRAPH": true
-        },
-        {
-            "USERNAME": "new2",
-            "EMAIL": [
-                "fakeemail"
-            ],
-            "PASSWORD": "heyo",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "sddsds",
-            "EMAIL": [
-                "sdds"
-            ],
-            "PASSWORD": "dsdsds",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "dssdsd",
-            "EMAIL": [
-                "sdsd"
-            ],
-            "PASSWORD": "dsdsds",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "fbfd",
-            "EMAIL": [
-                "fdfd"
-            ],
-            "PASSWORD": "fdfdb",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "gsbd",
-            "EMAIL": [
-                "gfb"
-            ],
-            "PASSWORD": "ggs",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "grbtzb",
-            "EMAIL": [
-                "rgtza"
-            ],
-            "PASSWORD": "zxr ",
-            "GRAPH": false
-        },
-        {
-            "USERNAME": "milktoast",
-            "EMAIL": [
-                "rumeza@educbe.ca"
-            ],
-            "PASSWORD": "hi",
-            "GRAPH": false
         }
+
     ]
 }

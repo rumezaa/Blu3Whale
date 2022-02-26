@@ -6,6 +6,8 @@ TabManager:
     ForgotScreen:
     HomeScreen:
     Search:
+    Note:
+    Notify:
 
 <Categories>
     on_release: root.set_check(check)
@@ -107,12 +109,16 @@ TabManager:
                                     pos: self.pos
                             Image:
                                 source: "Images/notif.png"
-                                pos_hint: {"center_x":.5,"center_y":0.6}
-                            MDLabel:
+                                pos_hint: {"center_x":.5,"center_y":0.66}
+                            MDRaisedButton:
                                 markup: True
                                 text: "[b][size=12sp]set reminders\nfor meal time[/size][/b]"
                                 halign:"center"
                                 pos_hint: {"center_x":.5,"center_y":0.18}
+                                on_press: app.root.current = "notify"
+
+
+
                         ElementCard:
                             id: ?
                             pos_hint: {"center_x":0.23,"center_y":0.35}
@@ -124,6 +130,15 @@ TabManager:
                                     radius: [30]
                                     size: self.size
                                     pos: self.pos
+                            Image:
+                                source: "Images/note.png"
+                                pos_hint: {"center_x":.5,"center_y":0.8}
+                            Image:
+                                source: "Images/note_2.jpg"
+                                pos_hint: {"center_x":.5,"center_y":0.4}
+                            MDRaisedButton:
+                                on_release: app.root.current = "Notes"
+                                pos_hint: {"center_x":.5,"center_y":0.14}
                         ElementCard:
 
             MDBottomNavigationItem:
@@ -189,8 +204,26 @@ TabManager:
                         on_release: app.root.current = "Login"
                         IconLeftWidget:
                             icon:"logout"
+<Notify>:
+    name: "notify"
+    BoxLayout:
+        orientation: "vertical"
+    MDToolbar:
+        left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+        md_bg_color: utils.get_color_from_hex("#F1F5C4")
 
+    BoxLayout:
+        orientation: "vertical"
+        MDTextField:
+            id: time_set
+            hint_text: "Enter the amount of times you would like to be reminded"
 
+        MDTextField:
+            id: int_set
+            hint_text: "Enter the amount of times you would like to be reminded"
+
+        MDRaisedButton:
+            on_press: root.choose_time()
 
 #recipe search screen
 <Search>:
@@ -247,8 +280,32 @@ TabManager:
             MDBottomNavigationItem:
                 name: "info"
                 icon: "calender-blank"
+<Note>
+    name: "Notes"
+    on_enter: root.load_notes(root.manager.get_screen("Login").ids.username.text)
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
 
 
+            md_bg_color: utils.get_color_from_hex("#F1F5C4")
+
+        FloatLayout:
+            ScrollView:
+                id: scrollview
+                TextInput:
+                    id: user_text
+                    font_size: '25sp'
+                    size_hint: 1, None
+                    background_color: utils.get_color_from_hex(	"#f1f5c4")
+                    height: max( (len(self._lines)+1) * self.line_height, scrollview.height)
+            MDFloatingActionButton:
+                icon: "android"
+                md_bg_color: utils.get_color_from_hex("eeeeee")
+                on_press: root.add_notes(root.manager.get_screen("Login").ids.username.text)
+                pos_hint:
 #signup screen
 <SignUpScreen>:
     name: "SignUp"

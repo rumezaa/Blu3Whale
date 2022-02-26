@@ -14,7 +14,7 @@ class UserLogin:
 
 
 
-        with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json",'r') as read:
+        with open("User_Login_Data\\logins.json",'r') as read:
             self.data=json.load(read)
 
         #filter data
@@ -31,20 +31,21 @@ class UserLogin:
             "GRAPH": False}
         #try opening json file
         try:
-            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","r") as file:
+            with open("User_Login_Data\\logins.json","r") as file:
                 json_data=json.load(file)
 
         #if file nonexsistant, write data
         except:
-            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
+            with open("User_Login_Data\\logins.json","w") as file:
                 self.login_data['Logins'].append(self.user_data), file
                 json.dump(self.login_data,file,indent=4)
 
         #if file exsists append new data
         else:
+
             json_data['Logins'].append(self.user_data)
 
-            with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
+            with open("User_Login_Data\\logins.json","w") as file:
                 json.dump(json_data,file,indent=4)
 
 
@@ -72,7 +73,7 @@ class UserLogin:
                        for i,retrieve in enumerate(self.filter_data)
                        if retrieve["USERNAME"]==self.username]
 
-        with open("C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Login_Data\\logins.json","w") as file:
+        with open("User_Login_Data\\logins.json","w") as file:
             json.dump(self.data,file,indent=4)
 
 

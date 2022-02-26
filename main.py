@@ -4,6 +4,8 @@ import json
 import kivy
 import kivymd
 import weakref
+
+import plyer
 from kivy.app import App
 
 
@@ -44,6 +46,9 @@ from kivy.core.window import Window
 
 
 #backend
+from plyer import notification as n
+
+from notes_blu3.note_saver import Notes
 from wellness_processor_blu3.wellness_db import WellnessTrack
 from user_login_blu3.user_auth import UserLogin
 from recipie_finder_blu3.recipe import RecipeFinder
@@ -261,20 +266,62 @@ class HomeScreen(Screen):
         self.show_tracker(user)
 
 
+class Note(Screen):
+    def load_notes(self,username):
+        try:
+            n.notify(
+                title="HEADING HERE",
+                message=" DESCRIPTION HERE",
+
+                # displaying time
+                timeout=2
+            )
+
+            #load user prev notes an dshow on screen
+            notes = Notes(username).load_notes()
+            self.ids.user_text.text = notes
+        except:
+            self.ids.user_text.text = ""
+            print("No notes found")
 
 
 
 
 
+    def add_notes(self,username):
+        try:
+            #check if user in data
+            Notes(username).update_notes(self.ids.user_text.text)
+        except:
+            #if not in data add them to data
+            Notes(username,self.ids.user_text.text).add_notes()
+
+class Notify(Screen):
+    def choose_time(self):
+        interval_amount = int(self.ids.int_set.text)
+        interval_time = int(self.ids.time_set.text)
+        to_secs = interval_time*60
+        Clock.schedule_interval(self.reminder_set, to_secs)
 
 
 
+    def reminder_set(self,*args):
+
+        n.notify(
+            title="HEADING HERE",
+            message=" DESCRIPTION HERE",
+
+            # displaying time
+            timeout=2
+        )
 
 
-#for searching recipies -NOTE ADD AUTOMATIC SCROLL TO TOP
+
+#for searching recipies -NOTE ADD AUTOMATIC SCROLL TO TOP -
 class Search(Screen):
     def get_search(self):
         self.input = self.ids.search_input.text
+        #scroll to top after new search
         self.ids.scrollview.scroll_y = 1
 
         if self.input != ():
@@ -329,6 +376,7 @@ class blu3whaleApp(MDApp):
         self.root.current = screen
 
     def build(self):
+
 
 
         return Builder.load_file("GUI.kv")

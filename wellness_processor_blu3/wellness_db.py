@@ -73,7 +73,7 @@ class WellnessTrack:
         dates = [dates[0] for dates in db_data ]
 
         mood_status = [float(mood[1]) for mood in db_data if float(mood[1])!=0]
-        print(mood_status)
+
 
         cat_1 = [cat_1[2] for cat_1 in db_data]
         cat_2 = [cat_2[3] for cat_2 in db_data]
@@ -81,9 +81,9 @@ class WellnessTrack:
 
         avg_mood = sum(mood_status) / len(mood_status)
         avg_mood = round(avg_mood,4)*100
-        print(avg_mood)
+
         mood_total = 100 - abs(avg_mood)
-        print(mood_total)
+
         return dates, mood_total, sum(cat_1), sum(cat_2),sum(cat_3)
 
     def create_visual(self):
