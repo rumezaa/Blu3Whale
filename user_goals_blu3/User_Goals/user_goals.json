@@ -1,0 +1,36 @@
+{
+    "Goals": [
+        {
+            "USER": "hi",
+            "GOALS": [
+                "new",
+                "new",
+                "new",
+                "new",
+                "new",
+                "new",
+                "neww",
+                "new"
+            ]
+        },
+        {
+            "USER": "new",
+            "GOALS": [
+                "i want to eat more",
+                "i want to eat more"
+            ]
+        },
+        {
+            "USER": "newacc",
+            "GOALS": [
+                "new"
+            ]
+        },
+        {
+            "USER": "ki",
+            "GOALS": [
+                "new"
+            ]
+        }
+    ]
+}

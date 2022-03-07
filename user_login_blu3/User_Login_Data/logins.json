@@ -1,0 +1,174 @@
+{
+    "Logins": [
+        {
+            "USERNAME": "newacc",
+            "EMAIL": [
+                "rumeza06@educbe.ca"
+            ],
+            "PASSWORD": "okay",
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "hi",
+            "EMAIL": [
+                "ddde"
+            ],
+            "PASSWORD": [
+                "hi"
+            ],
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "okay",
+            "EMAIL": [
+                "hi"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "newcat",
+            "EMAIL": [
+                "gs"
+            ],
+            "PASSWORD": "okay",
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "new",
+            "EMAIL": [
+                "hbytt"
+            ],
+            "PASSWORD": "ok",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "new",
+            "EMAIL": [
+                "hbytt"
+            ],
+            "PASSWORD": "ok",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "new",
+            "EMAIL": [
+                "fssdf"
+            ],
+            "PASSWORD": "ok",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "me",
+            "EMAIL": [
+                "hkdf"
+            ],
+            "PASSWORD": "123",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "huu",
+            "EMAIL": [
+                "hhi"
+            ],
+            "PASSWORD": "123",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "ki",
+            "EMAIL": [
+                "fake"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "123",
+            "EMAIL": [
+                "mew"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "new123",
+            "EMAIL": [
+                "newacc"
+            ],
+            "PASSWORD": "new",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "1234",
+            "EMAIL": [
+                "newww"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "new12345",
+            "EMAIL": [
+                "new"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "1112334223",
+            "EMAIL": [
+                "newrtg"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "cats1235",
+            "EMAIL": [
+                "newaccount"
+            ],
+            "PASSWORD": "new",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "hello12345",
+            "EMAIL": [
+                "newacoutur"
+            ],
+            "PASSWORD": "new",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "1234567890",
+            "EMAIL": [
+                "1234567890"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "145",
+            "EMAIL": [
+                "hello"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": false
+        },
+        {
+            "USERNAME": "3",
+            "EMAIL": [
+                "3"
+            ],
+            "PASSWORD": "hi",
+            "GRAPH": true
+        },
+        {
+            "USERNAME": "milktoast123",
+            "EMAIL": [
+                "rumezaf1@educbe.ca"
+            ],
+            "PASSWORD": "123",
+            "GRAPH": true
+        }
+    ]
+}
