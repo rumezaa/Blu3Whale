@@ -16,7 +16,7 @@ class WellnessTrack:
 
 
     def create_DB(self,*categories):
-        con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        con = sql.connect(f"wellness_processor_blu3\\User_Wellness_Data\\{self.username}_data.db")
         self.categories = list(categories)
         self.categ = ["date","mood"]
 
@@ -36,6 +36,15 @@ class WellnessTrack:
         self.input = input
         self.input = list(self.input)
 
+
+        for i,v in enumerate(self.input):
+            if v=="yes":
+                self.input[i]=1
+            elif v=="no":
+                self.input[i] = 0
+            else:
+                self.input[i] = int(v)
+
         self.date = datetime.now().date()
         self.seven_day +=1
         self.sentiment = sentiment
@@ -46,7 +55,7 @@ class WellnessTrack:
         self.eval = self.classify.polarity_scores(self.sentiment)
         self.mood = self.eval["compound"]
 
-        con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        con = sql.connect(f"wellness_processor_blu3\\User_Wellness_Data\\{self.username}_data.db")
         cur = con.cursor()
         # Create table
         data = [self.date,self.mood]
@@ -61,7 +70,7 @@ class WellnessTrack:
         # close db
         con.close()
     def retrieve_DB(self):
-        con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        con = sql.connect(f"wellness_processor_blu3\\User_Wellness_Data\\{self.username}_data.db")
         cur = con.cursor()
 
         # select the table
@@ -78,8 +87,10 @@ class WellnessTrack:
         cat_1 = [cat_1[2] for cat_1 in db_data]
         cat_2 = [cat_2[3] for cat_2 in db_data]
         cat_3 = [cat_3[4] for cat_3 in db_data]
-
-        avg_mood = sum(mood_status) / len(mood_status)
+        try:
+            avg_mood = sum(mood_status) / len(mood_status)
+        except:
+            avg_mood = 0
         avg_mood = round(avg_mood,4)*100
 
         mood_total = 100 - abs(avg_mood)
@@ -88,7 +99,7 @@ class WellnessTrack:
 
     def create_visual(self):
         # fetching the headers
-        con = sql.connect(f"C:\\Users\\rumeza\\PycharmProjects\\pythonProject\\User_Wellness_Data\\{self.username}_data.db")
+        con = sql.connect(f"wellness_processor_blu3\\User_Wellness_Data\\{self.username}_data.db")
         cursor = con.cursor()
 
         cursor.execute('''Select * from wellness_data''')
@@ -98,19 +109,28 @@ class WellnessTrack:
         #retrives the db categories
         headers = [i[0] for i in cursor.description if i != 'date']
 
-        #use this data for 7 day achievements ??
+        #use this data for 7 day achievements ?? -- ended up nto doing 7 day achievmets - maybe in a future update
         headers.remove('date')
 
-        categories = list(self.retrieve_DB())
+        #try fetching data if user has data
+        try:
+            categories = list(self.retrieve_DB())
 
-        #puts user data in an array
-        data_set = [categories[i] for i in range(len(categories)) if i>0]
+            #puts user data in an array
+            data_set = [categories[i] for i in range(len(categories)) if i>0]
+            achievement = max(data_set)
+            work = min(data_set)
 
-        days = [categories[i] for i in range(len(categories)) if i<=0]
+            #returns ur area of growth
+            achieve = [headers[i] for i,v in enumerate(data_set) if v==achievement]
+            work_on = [headers[i] for i,v in enumerate(data_set) if v==work]
 
-        return data_set, headers
 
+            return data_set, headers,achieve[0],work_on[0]
 
+        #if not, get the headers
+        except:
+            return headers
 
 
 

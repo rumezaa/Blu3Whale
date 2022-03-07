@@ -8,14 +8,27 @@ TabManager:
     Search:
     Note:
     Notify:
+    Make_Tracker:
+    Goal:
+    Chat:
+    Info:
+    FeedBack:
+
+
+
 
 <Categories>
-    on_release: root.set_check(check)
+    id:get_categ
 
     CheckboxLeftWidget:
         id: check
-        group: "check"
+        active: False
+        on_active: root.on_checkbox_Active()
 
+
+<Content>
+    orientation: "vertical"
+    size_hint_y: None
 
 
 #for decorating
@@ -38,8 +51,20 @@ TabManager:
             size: self.size
             pos: self.pos
 
+<NotifElement@FloatLayout>
+
+    size_hint: None,None
+    size: 300,160
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#ffffff")
+        RoundedRectangle:
+            radius: [40,40,0,0]
+            size: self.size
+            pos: self.pos
 
 
+#our main screen
 <HomeScreen>:
     name: "Home"
     on_enter: root.customize(root.manager.get_screen("Login").ids.username.text)
@@ -49,6 +74,7 @@ TabManager:
         orientation: "vertical"
         size: root.width, root.height
         MDToolbar:
+            id: toolbar
             title: "Welcome"
             md_bg_color: utils.get_color_from_hex("#86b2d2")
             right_action_items: [["account", lambda x: account_info.set_state("open")]]
@@ -61,11 +87,8 @@ TabManager:
 
                 MDBoxLayout:
                     id: recipie_card
-
                     size_hint: None,None
                     size: 300,400
-#                    padding:10
-#                    spacing: 3
                     pos_hint: {"center_x":0.5,"center_y":0.5}
                     canvas.before:
                         Color:
@@ -85,6 +108,7 @@ TabManager:
                                     radius: [30]
                                     size: self.size
                                     pos: self.pos
+
                             SearchElement:
                                 pos_hint: {"center_x":0.5,"center_y":0.3}
                                 MDIconButton:
@@ -95,7 +119,15 @@ TabManager:
                                     markup: True
                                     text: "[size=10sp][i]Feeling spicy?[/i][/size]\nMake a recipe!"
                                     pos_hint: {"center_x":0.5,"center_y":0.5}
-
+                            Image:
+                                source: "Images/recp_1.png"
+                                pos_hint:{"center_x":0.5,"center_y":0.78}
+                            Image:
+                                source: "Images/fork_1.png"
+                                pos_hint:{"center_x":0.9,"center_y":0.68}
+                            Image:
+                                source: "Images/fork_2.png"
+                                pos_hint:{"center_x":0.1,"center_y":0.68}
                         ElementCard:
                             id: notifs
                             pos_hint: {"center_x":0.7,"center_y":0.43}
@@ -111,6 +143,7 @@ TabManager:
                                 source: "Images/notif.png"
                                 pos_hint: {"center_x":.5,"center_y":0.66}
                             MDRaisedButton:
+                                md_bg_color: utils.get_color_from_hex("#3DC3FF")
                                 markup: True
                                 text: "[b][size=12sp]set reminders\nfor meal time[/size][/b]"
                                 halign:"center"
@@ -118,9 +151,8 @@ TabManager:
                                 on_press: app.root.current = "notify"
 
 
-
                         ElementCard:
-                            id: ?
+                            id: notes
                             pos_hint: {"center_x":0.23,"center_y":0.35}
                             size: 110,250
                             canvas.before:
@@ -137,9 +169,13 @@ TabManager:
                                 source: "Images/note_2.jpg"
                                 pos_hint: {"center_x":.5,"center_y":0.4}
                             MDRaisedButton:
+                                text: "Your Notes"
                                 on_release: app.root.current = "Notes"
                                 pos_hint: {"center_x":.5,"center_y":0.14}
-                        ElementCard:
+                                md_bg_color: utils.get_color_from_hex("#d0aed7")
+                        Image:
+                            pos_hint: {"center_x":0.7,"center_y":0.11}
+                            source: "Images/recipe_log.png"
 
             MDBottomNavigationItem:
                 name: "Main Screen"
@@ -155,34 +191,99 @@ TabManager:
                     pos_hint: {"center_x":0.5,"center_y":0.5}
                     canvas.before:
                         Color:
-                            rgba: utils.get_color_from_hex("#d9d2e9")
+                            rgba: utils.get_color_from_hex("#d7c6cf")
                         RoundedRectangle:
                             radius: [10]
                             size: self.size
                             pos: self.pos
+                    FloatLayout:
+                        ElementCard:
+                            pos_hint: {"center_x":0.5,"center_y":0.84}
+                            size: 280,110
+                            canvas.before:
+                                Color:
+                                    rgba: utils.get_color_from_hex("#ffd1df")
+                                RoundedRectangle:
+                                    radius: [30]
+                                    size: self.size
+                                    pos: self.pos
+                            MDFillRoundFlatButton:
+                                text: "Your\nCommunity"
+                                halign: "center"
+                                text_align:'center'
+                                pos_hint: {"center_x":0.24,"center_y":0.5}
+                                on_press: app.root.current = "chat"
+                                md_bg_color: utils.get_color_from_hex("#bcc8e5")
+                            Image:
+                                pos_hint: {"center_x":0.7,"center_y":0.5}
+                                source: "Images/chat_4.png"
+
+                        ElementCard:
+                            pos_hint: {"center_x":0.5,"center_y":0.5}
+                            size: 280,110
+                            canvas.before:
+                                Color:
+                                    rgba: utils.get_color_from_hex("#dcedc1")
+                                RoundedRectangle:
+                                    radius: [30]
+                                    size: self.size
+                                    pos: self.pos
+                            MDFillRoundFlatButton:
+                                text: "Understanding\nThe Journey"
+                                md_bg_color: utils.get_color_from_hex("#c6e299")
+                                pos_hint: {"center_x":0.24,"center_y":0.5}
+                                on_press: root.info()
+                            Image:
+                                pos_hint: {"center_x":0.7,"center_y":0.5}
+                                source: "Images/book.png"
 
 
+                        ElementCard:
+                            pos_hint: {"center_x":0.5,"center_y":0.17}
+                            size: 280,110
+                            canvas.before:
+                                Color:
+                                    rgba: utils.get_color_from_hex("#eec1ad")
+                                RoundedRectangle:
+                                    radius: [30]
+                                    size: self.size
+                                    pos: self.pos
+                            MDFillRoundFlatButton:
+                                text: "Creating Your\nGoals"
+                                valign: "center"
+                                md_bg_color: utils.get_color_from_hex("#eab198")
+                                pos_hint: {"center_x":0.24,"center_y":0.5}
+                                on_press: app.root.current = "goals"
+                            Image:
+                                pos_hint: {"center_x":0.73,"center_y":0.5}
+                                source: "Images/goal.png"
 
 
             MDBottomNavigationItem:
                 name: "Data Screen"
                 icon: "chart-bar"
+                id: screen
 
-                BoxLayout:
-                    id: create_graph
-                    size_hint: None,None
-                    size: 300,400
-                    orientation: "vertical"
-                    padding:10
-                    spacing: 10
-                    pos_hint: {"center_x":0.5,"center_y":0.5}
-                    canvas.before:
-                        Color:
-                            rgba: utils.get_color_from_hex("#eeeeee")
-                        RoundedRectangle:
-                            radius: [10]
-                            size: self.size
-                            pos: self.pos
+                FloatLayout:
+                    BoxLayout:
+                        id: create_graph
+                        size_hint: None,None
+                        size: 300,400
+                        orientation: "vertical"
+                        padding:10
+                        spacing: 3
+                        pos_hint: {"center_x":0.5,"center_y":0.5}
+                        canvas.before:
+                            Color:
+                                rgba: utils.get_color_from_hex("#eeeeee")
+                            RoundedRectangle:
+                                radius: [10]
+                                size: self.size
+                                pos: self.pos
+                    FloatLayout:
+                        id: flat
+                        pos_hint:{"center_x":.5,"center_y":.5}
+
 
     MDNavigationDrawer:
         id: account_info
@@ -193,37 +294,232 @@ TabManager:
                 size: self.texture_size
             ScrollView:
                 MDList:
-
-                    OneLineIconListItem:
-                        text: "settings"
-                        IconLeftWidget:
-                            icon:"cog"
-
                     OneLineIconListItem:
                         text: "logout"
                         on_release: app.root.current = "Login"
                         IconLeftWidget:
                             icon:"logout"
+
+
+
+<FeedBack>
+    name: "feedback"
+    md_bg_color: utils.get_color_from_hex("#BAE1FF")
+
+    FloatLayout:
+        MDFloatLayout:
+            pos_hint: {"center_x": 0.4,"center_y": 0.8}
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#BAE1FF")
+                Ellipse:
+                    size:self.size
+                    pos: self.pos
+        Image:
+            source: "Images/feed_back_logo.png"
+            pos_hint: {"center_x": 0.4,"center_y": 0.65}
+
+    BoxLayout:
+
+        orientation: "vertical"
+        MDToolbar:
+            title: "Help Us Improve"
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#c0c5ce")
+        FloatLayout:
+
+            spacing: 10
+            padding: 20
+            BoxLayout:
+                size_hint: None, None
+                size: 350,300
+                elevation: 30
+                pos_hint: {"center_x":0.5,"center_y":0.2}
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex("#c0c5ce")
+                    RoundedRectangle:
+                        radius: [40]
+                        pos: self.pos
+                        size: self.size
+            BoxLayout:
+                size_hint: None, None
+                size: 320,270
+                elevation: 30
+                pos_hint: {"center_x":0.5,"center_y":0.2}
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex("#ffffff")
+                    RoundedRectangle:
+                        radius: [40]
+                        pos: self.pos
+                        size: self.size
+            MDTextField:
+                id: feedback
+                multiline: True
+                mode: "rectangle"
+                hint_text: "report any bugs,give feedback"
+                line_color_focus: 0, 0, 0, 0.8
+
+                hint_text_color: 0, 0, 0, 0.8
+                size_hint_x: None
+                width: 260
+                pos_hint: {"center_x":0.5,"center_y":0.3}
+
+            MDRaisedButton:
+                text: "submit"
+                md_bg_color: utils.get_color_from_hex("#a7adba")
+                pos_hint: {"center_x":0.5,"center_y":0.1}
+                on_press: root.feedback(root.manager.get_screen("Login").ids.username.text)
+
+
+
+
+
+<Goal>:
+    name: "goals"
+    on_enter: root.load_goals(root.manager.get_screen("Login").ids.username.text)
+    BoxLayout:
+
+        orientation: "vertical"
+        MDToolbar:
+            title: "Your Goals"
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#efbdaf")
+        ScrollView:
+            MDList:
+                id: list
+        BoxLayout:
+            id: layout
+            orientation: "vertical"
+            size_hint: None,None
+
+
+
 <Notify>:
     name: "notify"
     BoxLayout:
         orientation: "vertical"
-    MDToolbar:
-        left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
-        md_bg_color: utils.get_color_from_hex("#F1F5C4")
+        MDToolbar:
+            title: "Set Reminders"
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#E7EE98")
+
+        FloatLayout:
+
+            MDCard:
+                size_hint: None,None
+                size: 300,400
+                orientation: "vertical"
+                pos_hint: {"center_x":0.5,"center_y":0.5}
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex("#58BDEB")
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+                FloatLayout:
+                    Image:
+                        source: "Images/notif_2.png"
+                        pos_hint: {"center_x":.5,"center_y":.7}
+                    NotifElement:
+                        pos_hint: {"center_x":.5,"center_y":.2}
+                    MDTextField:
+                        id: time_set
+                        mode: "rectangle"
+                        width: 100
+                        hint_text: "enter hours"
+                        max_length: 1
+                        pos_hint: {"center_x":0.5,"center_y":0.3}
+                        size_hint_x: None
+
+                    MDRaisedButton:
+                        text: "set"
+                        on_press: root.choose_time()
+                        pos_hint: {"center_x":0.5,"center_y":0.15}
+
+<Make_Tracker>
+    name: "makeTracker"
 
     BoxLayout:
         orientation: "vertical"
-        MDTextField:
-            id: time_set
-            hint_text: "Enter the amount of times you would like to be reminded"
+        padding: 20
+        MDLabel:
+            markup: True
+            text: "Choose your tracking categories [b](please choose 3)[/b]"
+            halign: "center"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        ScrollView:
+            MDList:
+                id: list
+                OneLineIconListItem:
+                    id: check_11
+                    divider: None
+                    text: "was I active today"
+                    CheckboxLeftWidget:
+                        id: check_1
 
-        MDTextField:
-            id: int_set
-            hint_text: "Enter the amount of times you would like to be reminded"
+                OneLineIconListItem:
+                    id: check_22
+                    divider: None
+                    text: "meals eaten"
+                    CheckboxLeftWidget:
+                        id: check_2
+
+                OneLineIconListItem:
+                    id: check_33
+                    divider: None
+                    text: "water drank (in cups)"
+                    CheckboxLeftWidget:
+                        id: check_3
+                        active:
+                OneLineIconListItem:
+                    id: check_44
+                    divider: None
+                    text: "time gone without binging"
+                    CheckboxLeftWidget:
+                        id: check_4
+
+
+                OneLineIconListItem:
+                    id: check_55
+                    divider: None
+                    text: "hours slept"
+                    CheckboxLeftWidget:
+                        id: check_5
 
         MDRaisedButton:
-            on_press: root.choose_time()
+            pos_hint: {"center_x":.5,"center_y":.5}
+            text: "submit"
+            on_press: root.user_submit(root.manager.get_screen("Login").ids.username.text)
+
+
+
+        MDLabel:
+            markup: True
+            halign: "center"
+            text: "..or make your own!\n[size=12][i]please make these categories trackable\n by numerical values or 'yes'/'no'[/i][/size]"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDTextField:
+            id: cust_1
+            hint_text: "enter the name of your first category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+
+        MDTextField:
+            id: cust_2
+            hint_text: "enter the name of your second category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDTextField:
+            id: cust_3
+            hint_text: "enter the name of your third category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDRaisedButton:
+            text: "submit"
+            on_press: root.submit(root.manager.get_screen("Login").ids.username.text)
+            pos_hint: {"center_x":.5,"center_y":.5}
+
 
 #recipe search screen
 <Search>:
@@ -231,81 +527,103 @@ TabManager:
     BoxLayout:
         orientation: "vertical"
         MDToolbar:
-
+            elevation: 10
             left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
             md_bg_color: utils.get_color_from_hex("#F1F5C4")
 
-        MDBottomNavigation:
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 20
+            padding: 20
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#F5E1C4")
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDTextField:
+                id: search_input
+                mode: "rectangle"
+                line_color_focus: 0, 0, 0, 0.8
+                pos_hint:{"center_x":0.5}
+                hint_text: 'search a food'
+                hint_text_color: 0, 0, 0, 0.8
+                icon_right: 'magnify'
+                icon_right_color_normal: 0, 0, 0, 0.8
+                size_hint_x: None
+                width: 150
+                font_size: 16
+                multiline: False
+                on_text_validate: root.get_search()
+            ScrollView:
+                id: scrollview
+                Recipe:
+                    id: recipe_view
+                    cols: 1
+                    row_default_height: (self.width - self.cols*self.spacing[0]) / self.cols
+                    row_force_default: True
+                    adaptive_height: True
+                    padding: dp(4), dp(4)
+                    spacing: dp(20)
 
-            MDBottomNavigationItem:
-                name: "recipe_search"
-                icon: "magnify"
-                BoxLayout:
-                    orientation: "vertical"
-                    spacing: 20
-                    padding: 20
-                    canvas.before:
-                        Color:
-                            rgba: utils.get_color_from_hex("#F5E1C4")
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                    MDTextField:
-                        id: search_input
-
-                        mode: "rectangle"
-                        line_color_focus: 0, 0, 0, 0.8
-                        pos_hint:{"center_x":0.5}
-                        hint_text: 'search a food'
-                        hint_text_color: 0, 0, 0, 0.8
-                        icon_right: 'magnify'
-                        icon_right_color_normal: 0, 0, 0, 0.8
-                        size_hint_x: None
-                        width: 150
-                        font_size: 16
-
-                        multiline: False
-                        on_text_validate: root.get_search()
-                    ScrollView:
-                        id: scrollview
-                        Recipe:
-                            id: recipe_view
-                            cols: 1
-                            row_default_height: (self.width - self.cols*self.spacing[0]) / self.cols
-                            row_force_default: True
-                            adaptive_height: True
-                            padding: dp(4), dp(4)
-                            spacing: dp(20)
-
-            MDBottomNavigationItem:
-                name: "info"
-                icon: "calender-blank"
 <Note>
     name: "Notes"
     on_enter: root.load_notes(root.manager.get_screen("Login").ids.username.text)
     BoxLayout:
         orientation: "vertical"
         MDToolbar:
-
+            right_action_items: [["bookmark-check", lambda x: root.add_notes(root.manager.get_screen("Login").ids.username.text) ]]
             left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
-
-
-            md_bg_color: utils.get_color_from_hex("#F1F5C4")
+            md_bg_color: utils.get_color_from_hex("#F1CBFF")
 
         FloatLayout:
             ScrollView:
                 id: scrollview
                 TextInput:
                     id: user_text
+
                     font_size: '25sp'
                     size_hint: 1, None
-                    background_color: utils.get_color_from_hex(	"#f1f5c4")
+                    background_color: utils.get_color_from_hex(	"#f8e5ff")
                     height: max( (len(self._lines)+1) * self.line_height, scrollview.height)
-            MDFloatingActionButton:
-                icon: "android"
-                md_bg_color: utils.get_color_from_hex("eeeeee")
-                on_press: root.add_notes(root.manager.get_screen("Login").ids.username.text)
-                pos_hint:
+
+
+<Chat>
+    name: "chat"
+    on_enter: root.load_text()
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#ffdaea")
+        BoxLayout:
+            orientation: "vertical"
+            padding: 10
+            ScrollView:
+                id: scroll
+                MDLabel:
+                    id: chatroom
+                    text_size: self.width,None
+                    height: self.texture_size[1]
+                    size_hint_y:None
+                    text: "CHAT REFRESHED"
+
+
+
+            MDTextField:
+                id: chat_text
+                color_mode: "custom"
+                mode: "rectangle"
+
+                size_hint_x: None
+                width: 350
+                line_color_focus: 0, 0, 0, 0.8
+                hint_text: "say something.."
+                pos_hint: {"center_x":.5,"center_y":.5}
+                on_text_validate: root.new_text(root.manager.get_screen("Login").ids.username.text)
+
+
 #signup screen
 <SignUpScreen>:
     name: "SignUp"
@@ -385,9 +703,9 @@ TabManager:
             markup: True
             text: "[b]Sign Up[/b]"
             pos_hint: {"center_x": 0.5,"center_y": 0.2}
-            md_bg_color: utils.get_color_from_hex("#d9d2e9")
+
             on_press: root.signUp()
-            md_bg_color:  utils.get_color_from_hex("#d1e2fa")
+            md_bg_color:  utils.get_color_from_hex("#bccbe1")
 
 
         MDRaisedButton:
@@ -396,7 +714,7 @@ TabManager:
             text: "[b]I have an Account[/b]"
             pos_hint: {"center_x": 0.5,"center_y": 0.1}
             on_press: app.root.current="Login"
-            md_bg_color:  utils.get_color_from_hex("#d1e2fa")
+            md_bg_color:  utils.get_color_from_hex("#bccbe1")
 
 
 
@@ -404,6 +722,7 @@ TabManager:
 #loginscreen
 <LoginScreen>:
     name: "Login"
+    on_enter: self.ids.username.text=""
     FloatLayout:
         MDIconButton:
             icon: "arrow-left"
@@ -451,7 +770,7 @@ TabManager:
             MDFillRoundFlatButton:
                 id: loggedIn
                 markup: True
-                text: "[color=#d1e2fa][b]login[/b][/color]"
+                text: "[color=#bccbe1][b]login[/b][/color]"
                 md_bg_color: utils.get_color_from_hex("#eeeeee")
                 pos_hint: {"center_x": 0.5}
                 on_press: root.login()
@@ -520,7 +839,7 @@ TabManager:
             MDFillRoundFlatButton:
                 id: loggedIn
                 markup: True
-                text: "[color=#d1e2fa][b]login[/b][/color]"
+                text: "[color=#bccbe1][b]login[/b][/color]"
                 pos_hint: {"center_x": 0.5}
                 md_bg_color: utils.get_color_from_hex("#eeeeee")
                 on_press: root.forgot_pass()
@@ -535,6 +854,49 @@ TabManager:
 
 
 
+<Info@Screen>
+    name: "info"
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#cae4c0")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
 
+        orientation: "vertical"
+        MDToolbar:
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#b0c4a8")
+        Carousel:
+            direction: "right"
+            MDCard:
+                size_hint: None,None
+                size: 300,400
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                size_hint_y: None
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex("#ffffff")
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                FloatLayout:
+                    Image:
+                        source: "Images/trigs.png"
+                        pos_hint: {"center_x":.5,"center_y":.5}
+                    MDLabel:
+                        markup: True
+                        text: "[size=13][b]Understand \nyour triggers and \nreverse their effects[/b][/size]"
+                        pos_hint: {"center_x":.55,"center_y":.45}
+                        halign: "center"
+                    MDFloatingActionButton:
+                        pos_hint: {"center_x":.25,"center_y":.5}
+                        on_press: root.trigs()
+                        type: "large"
+                        icon: "alert-decagram-outline"
+                        md_bg_color: utils.get_color_from_hex("#ffffa1")
+                        size_hint: None, None
+                        size: 100, 150
 
 

@@ -1,14 +1,6 @@
-import kivymd
-import kivy
-from kivymd.uix.card import MDCard
-from kivymd.uix.button import MDIconButton
-from kivymd.uix.label import MDLabel
-from kivy.uix.image import AsyncImage
-
-from kivymd.uix.imagelist import SmartTileWithStar
 import requests
 
-
+# for searchign recipies
 class RecipeFinder:
     def __init__(self,input):
         self.input = input
@@ -21,17 +13,16 @@ class RecipeFinder:
 
 
     def get_info(self):
-        # clear "browsing" b4 showing new browing
+        # clear "browsing" b4 showing new browsing
         file_clear = open("file.html", "w")
         file_clear.close()
 
-        # recieve the ingredients, meal name, recipe instruction, mal ima
+        # receive the ingredients, meal name, recipe instruction,
         self.all_ingreds = []
         self.all_names = [self.data[i]["strMeal"] for i in range(len(self.data))]
         self.all_instrucs= [self.data[i]["strInstructions"] for i in range(len(self.data))]
         self.all_images=[self.data[i]["strMealThumb"] for i in range(len(self.data))]
-        self.all_videos=[self.data[i]["strYoutube"] for i in range(len(self.data))]
-
+        self.all_videos=[self.data[i]["strYoutube"] for i in range(len(self.data))] #--- not using the vids anymore
 
 
 
@@ -65,13 +56,7 @@ class RecipeFinder:
             "IMAGES":self.all_images,
             "VIDEOS":self.all_videos
         }
-            # title = MDLabel(
-            #     text=f"{self.meal_name}",
-            #     font_style = "H2",
-            #     halign = "center"
-            # )
-            #
-            # self.add_widget(title)
+
 
 
 
