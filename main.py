@@ -61,10 +61,12 @@ from wellness_processor_blu3.wellness_db import WellnessTrack
 from user_login_blu3.user_auth import UserLogin
 from recipie_finder_blu3.recipe import RecipeFinder
 import numpy as np
-
+import certifi
 #setting our window size
 #Window.size = (380,580)
 
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
 
 
