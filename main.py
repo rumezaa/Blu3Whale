@@ -63,7 +63,7 @@ from recipie_finder_blu3.recipe import RecipeFinder
 import numpy as np
 
 #setting our window size
-Window.size = (380,580)
+#Window.size = (380,580)
 
 
 
