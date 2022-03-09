@@ -6,7 +6,6 @@ import smtplib
 from email.message import EmailMessage
 import kivy
 import kivymd
-import weakref
 import plyer
 from kivy import utils
 from kivy.app import App
