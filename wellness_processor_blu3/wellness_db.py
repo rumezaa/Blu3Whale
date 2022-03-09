@@ -1,12 +1,10 @@
 import matplotlib.pyplot as plt
 import nltk
-import csv
-import pandas
 from matplotlib import pyplot as pi
 import sqlite3 as sql
 from nltk.sentiment import SentimentIntensityAnalyzer
 from datetime import datetime
-import numpy as np
+
 
 
 class WellnessTrack:
