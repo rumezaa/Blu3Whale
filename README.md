@@ -1,7 +1,7 @@
 # blu3whale_app
 This is the offical blu3whale source code!
 
-THIS APP IS STILL BEING DEVELOPED
+V1 OUT NOW - https://play.google.com/store/apps/details?id=org.blue.blu3whale
 
 App - blu3whale
 
