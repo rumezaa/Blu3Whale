@@ -1,0 +1,82 @@
+#:import utils kivy.utils
+#:include gui/elements.kv
+
+<Make_Tracker>
+    name: "makeTracker"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        MDLabel:
+            markup: True
+            text: "Choose your tracking categories [b](please choose 3)[/b]"
+            halign: "center"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        ScrollView:
+            MDList:
+                id: list
+                OneLineIconListItem:
+                    id: check_11
+                    divider: None
+                    text: "was I active today"
+                    CheckboxLeftWidget:
+                        id: check_1
+
+                OneLineIconListItem:
+                    id: check_22
+                    divider: None
+                    text: "meals eaten"
+                    CheckboxLeftWidget:
+                        id: check_2
+
+                OneLineIconListItem:
+                    id: check_33
+                    divider: None
+                    text: "water drank (in cups)"
+                    CheckboxLeftWidget:
+                        id: check_3
+                        active:
+                OneLineIconListItem:
+                    id: check_44
+                    divider: None
+                    text: "time gone without binging"
+                    CheckboxLeftWidget:
+                        id: check_4
+
+
+                OneLineIconListItem:
+                    id: check_55
+                    divider: None
+                    text: "hours slept"
+                    CheckboxLeftWidget:
+                        id: check_5
+
+        MDRaisedButton:
+            pos_hint: {"center_x":.5,"center_y":.5}
+            text: "submit"
+            on_press: root.user_submit(root.manager.get_screen("Login").ids.username.text)
+
+
+
+        MDLabel:
+            markup: True
+            halign: "center"
+            text: "..or make your own!\n[size=12][i]please make these categories trackable\n by numerical values or 'yes'/'no'[/i][/size]"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDTextField:
+            id: cust_1
+            hint_text: "enter the name of your first category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+
+        MDTextField:
+            id: cust_2
+            hint_text: "enter the name of your second category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDTextField:
+            id: cust_3
+            hint_text: "enter the name of your third category"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDRaisedButton:
+            text: "submit"
+            on_press: root.submit(root.manager.get_screen("Login").ids.username.text)
+            pos_hint: {"center_x":.5,"center_y":.5}

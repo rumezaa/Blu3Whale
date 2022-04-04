@@ -68,5 +68,17 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="test_user_data" uuid="230001f3-d832-446a-ba89-9668f641ba39">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\rumeza\PycharmProjects\pythonProject\wellness_processor_blu3\User_Wellness_Data\test_user_data.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>

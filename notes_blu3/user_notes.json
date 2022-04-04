@@ -11,6 +11,10 @@
         {
             "USER": "new",
             "NOTES": "effyu"
+        },
+        {
+            "USER": "test_user",
+            "NOTES": "hellow"
         }
     ]
 }

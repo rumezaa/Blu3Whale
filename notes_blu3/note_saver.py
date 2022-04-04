@@ -27,6 +27,7 @@ class Notes:
                 with open("notes_blu3/user_notes.json", "w") as file:
                     json.dump(self.data, file, indent=4)
 
+        raise IndexError
 
 
     #for user's that are not in the json file
