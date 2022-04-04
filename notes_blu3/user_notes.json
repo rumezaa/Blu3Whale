@@ -1,18 +1,6 @@
 {
     "Notes": [
         {
-            "USER": "hi",
-            "NOTES": "recpie"
-        },
-        {
-            "USER": "bye",
-            "NOTES": "ok"
-        },
-        {
-            "USER": "new",
-            "NOTES": "effyu"
-        },
-        {
             "USER": "test_user",
             "NOTES": "hellow"
         }

@@ -1,0 +1,49 @@
+#:import utils kivy.utils
+
+
+
+<Categories>
+    id:get_categ
+
+    CheckboxLeftWidget:
+        id: check
+        active: False
+        on_active: root.on_checkbox_Active()
+
+
+<Content>
+    orientation: "vertical"
+    size_hint_y: None
+
+
+#for decorating
+<ElementCard@FloatLayout>:
+    size_hint: None,None
+    padding: 10
+    spacing: 10
+
+<SearchElement@GridLayout>
+    cols: 2
+    size_hint: None,None
+    size: 200,50
+
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#ffffff")
+        RoundedRectangle:
+            radius: [40]
+            size: self.size
+            pos: self.pos
+
+<NotifElement@FloatLayout>
+
+    size_hint: None,None
+    size: 300,160
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#ffffff")
+        RoundedRectangle:
+            radius: [40,40,0,0]
+            size: self.size
+            pos: self.pos

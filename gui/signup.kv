@@ -1,0 +1,239 @@
+#:import utils kivy.utils
+#:include gui/elements.kv
+
+#signup screen
+<SignUpScreen>:
+    name: "SignUp"
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#FFFFFF")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        spacing: 10
+        padding: 40
+        pos_hint: {"center_x": 0.5}
+        MDFloatLayout:
+            pos_hint: {"center_x": 0.4,"center_y": 0.8}
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#d1e2fa")
+                Ellipse:
+                    size:self.size
+                    pos: self.pos
+
+
+        Image:
+            source: "Images/brand_name.png"
+            pos_hint: {"center_x": 0.4,"center_y": 0.8}
+
+        MDLabel:
+            markup: True
+            font_name: "Dubai-bold"
+            text: "[b][size=20]START YOUR JOURNEY[/size][/b]"
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex("#eeeeee")
+            pos_hint: {"center_x": 0.55,"center_y": 0.7}
+
+        MDTextField:
+            id: add_email
+            hint_text: "email"
+            icon_right: "email"
+            required: True
+            helper_text_mode: "on_error"
+            size_hint_x: None
+
+            width: 300
+            height: 10
+            pos_hint: {"center_x": 0.5,"center_y": 0.5}
+
+        MDTextField:
+            id: add_username
+            required: True
+            helper_text_mode: "on_error"
+            max_text_length: 10
+            hint_text: "username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5,"center_y": 0.4}
+
+        MDTextField:
+            id: add_user_password
+            required: True
+            helper_text_mode: "on_error"
+            hint_text: "password"
+            icon_color: 1,1,1,1
+            size_hint_x: None
+            width: 300
+            password: True
+            pos_hint: {"center_x": 0.5,"center_y": 0.3}
+
+
+        MDRaisedButton:
+            id: loggedIn
+            markup: True
+            text: "[b]Sign Up[/b]"
+            pos_hint: {"center_x": 0.5,"center_y": 0.2}
+            on_press: root.signUp()
+            md_bg_color:  utils.get_color_from_hex("#bccbe1")
+
+
+        MDRaisedButton:
+            id: loggedIn
+            markup: True
+            text: "[b]I have an Account[/b]"
+            pos_hint: {"center_x": 0.5,"center_y": 0.1}
+            on_press: app.root.current="Login"
+            md_bg_color:  utils.get_color_from_hex("#bccbe1")
+
+        MDIconButton:
+            id: show_pass
+            icon: "eye-off"
+            pos_hint: {'center_x': .84, 'center_y': .32}
+            on_press: root.see_pass()
+
+#loginscreen
+<LoginScreen>:
+    name: "Login"
+    on_enter: self.ids.user_password.text=""
+    FloatLayout:
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_x": 0.06,"center_y": 0.95}
+            on_press: app.root.current = "SignUp"
+
+
+
+        MDLabel:
+            text: "Register"
+            pos_hint: {"center_x": 0.6,"center_y": 0.95}
+        MDBoxLayout:
+            size_hint: None,None
+            size: 300,400
+            orientation: "vertical"
+            spacing: 10
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#d1e2fa")
+                RoundedRectangle:
+                    radius: [30]
+                    size: self.size
+                    pos: self.pos
+            Image:
+                source: "Images/login_logo.png"
+                pos_hint: {"center_x":0.47,"center_y":0.5}
+
+            MDTextField:
+                id: username
+                hint_text: "username"
+                icon_right: "account"
+                size_hint_x: None
+                width: 210
+                pos_hint: {"center_x": 0.5}
+
+            MDTextField:
+                id: user_password
+                hint_text: "password"
+
+                size_hint_x: None
+                width: 210
+                password: True
+                pos_hint: {"center_x": 0.5}
+
+
+
+
+
+            MDFillRoundFlatButton:
+                id: loggedIn
+                markup: True
+                text: "[color=#bccbe1][b]login[/b][/color]"
+                md_bg_color: utils.get_color_from_hex("#eeeeee")
+                pos_hint: {"center_x": 0.5}
+                on_press: root.login()
+
+
+            MDTextButton:
+                id: forgot_pass
+                markup: True
+                text: "[color=#000b80][size=12sp]Forgot password?[/size][/color]"
+                pos_hint: {"center_x": 0.5}
+                on_press: app.root.current="Forgot"
+
+            Widget:
+                size_hint: None,None
+                size: 10,20
+        MDIconButton:
+            id: show_pass
+            icon: "eye-off"
+            pos_hint: {'center_x': .73, 'center_y': .39}
+            on_press: root.see_pass()
+
+
+#forgot password
+<ForgotScreen>:
+    name: "Forgot"
+    FloatLayout:
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_x": 0.06,"center_y": 0.95}
+            on_press: app.root.current = "Login"
+
+        MDLabel:
+            text: "Login"
+            pos_hint: {"center_x": 0.6,"center_y": 0.95}
+        MDBoxLayout:
+            size_hint: None,None
+            size: 300,400
+            orientation: "vertical"
+            padding:10
+            spacing: 10
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#d1e2fa")
+                RoundedRectangle:
+                    radius: [30]
+                    size: self.size
+                    pos: self.pos
+            Image:
+                source: "Images/forgot_logo.png"
+
+
+            MDTextField:
+                id: _username
+                hint_text: "username"
+                icon_right: "account"
+                size_hint_x: None
+                width: 210
+                pos_hint: {"center_x": 0.5}
+
+            MDTextField:
+                id: new_password
+                hint_text: "new password"
+                size_hint_x: None
+                width: 210
+                password: True
+                pos_hint: {"center_x": 0.5}
+
+            MDFillRoundFlatButton:
+                id: loggedIn
+                markup: True
+                text: "[color=#bccbe1][b]login[/b][/color]"
+                pos_hint: {"center_x": 0.5}
+                md_bg_color: utils.get_color_from_hex("#eeeeee")
+                on_press: root.forgot_pass()
+
+            Widget:
+                size_hint: None,None
+                size: 10,40
+        MDIconButton:
+            id: show_pass
+            icon: "eye-off"
+            pos_hint: {'center_x': .72, 'center_y': .4}
+            on_press: root.see_pass()

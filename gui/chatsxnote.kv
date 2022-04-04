@@ -1,0 +1,59 @@
+#:import utils kivy.utils
+#:include gui/elements.kv
+
+
+<Note>
+    name: "Notes"
+    on_enter: root.load_notes(root.manager.get_screen("Login").ids.username.text)
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            right_action_items: [["bookmark-check", lambda x: root.add_notes(root.manager.get_screen("Login").ids.username.text)]]
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#F1CBFF")
+
+        FloatLayout:
+            ScrollView:
+                id: scrollview
+                TextInput:
+                    id: user_text
+
+                    font_size: '25sp'
+                    size_hint: 1, None
+                    background_color: utils.get_color_from_hex(	"#f8e5ff")
+                    height: max( (len(self._lines)+1) * self.line_height, scrollview.height)
+
+
+<Chat>
+    name: "chat"
+    on_enter: root.load_text()
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#ffdaea")
+        BoxLayout:
+            orientation: "vertical"
+            padding: 10
+            ScrollView:
+                id: scroll
+                MDLabel:
+                    id: chatroom
+                    text_size: self.width,None
+                    height: self.texture_size[1]
+                    size_hint_y:None
+                    text: "CHAT REFRESHED"
+
+
+            MDTextField:
+                id: chat_text
+                color_mode: "custom"
+                mode: "rectangle"
+
+                size_hint_x: None
+                width: 350
+                line_color_focus: 0, 0, 0, 0.8
+                hint_text: "say something.."
+                pos_hint: {"center_x":.5,"center_y":.5}
+                on_text_validate: root.new_text(root.manager.get_screen("Login").ids.username.text)

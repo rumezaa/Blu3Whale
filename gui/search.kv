@@ -1,0 +1,49 @@
+#:import utils kivy.utils
+#:include gui/elements.kv
+
+
+
+#recipe search screen
+<Search>:
+    name: "SearchRecipies"
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            elevation: 10
+            left_action_items: [["arrow-left", lambda x: app.set_screen('Home') ]]
+            md_bg_color: utils.get_color_from_hex("#F1F5C4")
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 20
+            padding: 20
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#F5E1C4")
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDTextField:
+                id: search_input
+                mode: "rectangle"
+                line_color_focus: 0, 0, 0, 0.8
+                pos_hint:{"center_x":0.5}
+                hint_text: 'search a food'
+                hint_text_color: 0, 0, 0, 0.8
+                icon_right: 'magnify'
+                icon_right_color_normal: 0, 0, 0, 0.8
+                size_hint_x: None
+                width: 150
+                font_size: 16
+                multiline: False
+                on_text_validate: root.get_search()
+            ScrollView:
+                id: scrollview
+                Recipe:
+                    id: recipe_view
+                    cols: 1
+                    row_default_height: (self.width - self.cols*self.spacing[0]) / self.cols
+                    row_force_default: True
+                    adaptive_height: True
+                    padding: dp(4), dp(4)
+                    spacing: dp(20)
