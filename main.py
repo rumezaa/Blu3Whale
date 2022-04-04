@@ -6,9 +6,10 @@ import smtplib
 from email.message import EmailMessage
 import kivy
 import kivymd
+import weakref
 import plyer
 from kivy import utils
-
+from kivy.app import App
 
 
 
@@ -40,6 +41,7 @@ from kivy.uix.image import AsyncImage,Image
 from kivy.uix.scrollview import ScrollView
 from kivymd.uix.button import MDFillRoundFlatButton
 from kivymd.uix.imagelist import SmartTileWithLabel
+from kivy.uix.videoplayer import VideoPlayer
 from kivymd.uix.button import MDIconButton
 from kivymd.uix.textfield import MDTextFieldRound
 from kivymd.uix.bottomnavigation import MDBottomNavigationItem
@@ -59,10 +61,6 @@ from wellness_processor_blu3.wellness_db import WellnessTrack
 from user_login_blu3.user_auth import UserLogin
 from recipie_finder_blu3.recipe import RecipeFinder
 import numpy as np
-
-import certifi
-
-os.environ['SSL_CERT_FILE'] = certifi.where()
 
 #setting our window size
 Window.size = (380,580)
@@ -118,15 +116,6 @@ class SignUpScreen(Screen):
 
             if info==False:
                 self.ids.add_username.hint_text = "username is in use!"
-    #for seeing and unseeing password
-    def see_pass(self):
-        if self.ids.add_user_password.password == True:
-            self.ids.add_user_password.password = False
-            self.ids.show_pass.icon = "eye"
-
-        else:
-            self.ids.add_user_password.password = True
-            self.ids.show_pass.icon = "eye-off"
 
     def go_to_login(self):
         self.parent.current= "Login"
@@ -143,28 +132,8 @@ class LoginScreen(Screen):
         #clear inputs
 
         if signed_in==True:
-            with open("session.json", "r") as file:
-                data = json.load(file)
-
-            self.sesh = {"USER": self.username,
-                         "PASSW": password}
-            data["UserSession"].append(self.sesh)
-
-            with open("session.json", "w") as wfile:
-                json.dump(data, wfile)
-
             self.parent.current="Home"
             self.ids.user_password.text = ""
-
-    #for seeing and unseeing password
-    def see_pass(self):
-        if self.ids.user_password.password == True:
-            self.ids.user_password.password = False
-            self.ids.show_pass.icon = "eye"
-
-        else:
-            self.ids.user_password.password = True
-            self.ids.show_pass.icon = "eye-off"
 
 
 # for updating user's password
@@ -173,6 +142,7 @@ class ForgotScreen(Screen):
         #collect user info
         username = self.ids._username.text
         email = UserLogin(username,"").get_email()
+
 
 
         new_pass = self.ids.new_password.text
@@ -188,15 +158,6 @@ class ForgotScreen(Screen):
             self.parent.current = "Home"
         except:
             print("username incorrect")
-    #for seeing and unseeing password
-    def see_pass(self):
-        if self.ids.new_password.password == True:
-            self.ids.new_password.password = False
-            self.ids.show_pass.icon = "eye"
-
-        else:
-            self.ids.new_password.password = True
-            self.ids.show_pass.icon = "eye-off"
 
 
 #carries our basic graph funcs
@@ -244,7 +205,6 @@ class HomeScreen(Screen):
 
     #for past users
     def show_tracker(self,user):
-
         try:
             self.username = user
 
@@ -257,7 +217,7 @@ class HomeScreen(Screen):
             data_set = graph_data[0]
             headers = graph_data[1]
 
-            #getting the user's area of growth and expetise
+            #getting the user's area of grwoth and expetise
             achievement = graph_data[2]
             work_on = graph_data[3]
 
@@ -309,10 +269,14 @@ class HomeScreen(Screen):
 
 
         except:
+            #for new users
             self.ids.flat.clear_widgets()
             self.ids.create_graph.clear_widgets()
-            self.ids.create_graph.add_widget(MDLabel(text="There was an Error :("))
+            self.ids.create_graph.add_widget(MDLabel(text="No graph found, try adding some data!"))
 
+            b = MDIconButton(icon="plus-circle-outline")
+            b.bind(on_press=lambda x: self.update_tracker(self.user, graph_data))
+            self.ids.create_graph.add_widget(b)
 
     #for new users
     def create_tracker(self, user):
@@ -330,13 +294,13 @@ class HomeScreen(Screen):
         self.parent.current = "makeTracker"
 
     #for updating the user's graph
-    def update_tracker(self,user,categories,instance=None):
+    def update_tracker(self,user,categories,instance):
         try:
             self.user = user
             self.categories = categories
 
             #getting user's categories
-            cat_1 = MDTextField(hint_text=self.categories[0])
+            cat_1 = MDTextField(hint_text="how're you feeling today?",multiline=True)
             cat_2 = MDTextField(hint_text=self.categories[1])
             cat_3 = MDTextField(hint_text=self.categories[2])
             cat_4 = MDTextField(hint_text=self.categories[3])
@@ -462,7 +426,6 @@ class Make_Tracker(Screen):
             cat_2 = li[1]
             cat_3 = li[2]
 
-
             #make the user's data base
             WellnessTrack(user).create_DB(cat_1,cat_2,cat_3)
 
@@ -520,6 +483,7 @@ class FeedBack(Screen):
 class Note(Screen):
     def load_notes(self,username):
         try:
+
             #load user prev notes an dshow on screen
             notes = Notes(username).load_notes()
             self.ids.user_text.text = notes
@@ -532,12 +496,10 @@ class Note(Screen):
     def add_notes(self,username):
         try:
             #check if user in data
-
             Notes(username).update_notes(self.ids.user_text.text)
         except:
             #if not in data add them to data
             Notes(username,self.ids.user_text.text).add_notes()
-            print("error")
 
 #for setting timers for meal time
 class Notify(Screen):
@@ -702,8 +664,6 @@ class Search(Screen):
 #other stuff
 class TabManager(ScreenManager):
     pass
-
-
 class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
@@ -718,24 +678,7 @@ class blu3whaleApp(MDApp):
         self.root.current = screen
 
     def build(self):
-        self.file = Builder.load_file("gui/GUI.kv")
-        return self.file
-
-    def on_start(self):
-        #for automatically logging in the user
-        try:
-            with open("session.json","r") as file:
-                data = json.load(file)
-
-            d = len(data["UserSession"])
-            last_sesh = data["UserSession"][d-1]
-
-            self.file.get_screen('Login').ids.username.text = last_sesh["USER"]
-            self.file.get_screen('Login').ids.user_password.text = last_sesh["PASSW"]
-
-            self.set_screen('Home')
-        except:
-            pass
+        return Builder.load_file("GUI.kv")
 
 
 blu3whaleApp().run()
