@@ -1,4 +1,10 @@
 {
     "Goals": [
+        {
+            "USER": "test_user",
+            "GOALS": [
+                "me new goal"
+            ]
+        }
     ]
 }

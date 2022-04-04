@@ -18,7 +18,7 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivymd.app import MDApp
 from kivy.uix.widget import Widget
-from backend_kivyagg import FigureCanvasKivyAgg
+from garden_matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
 
 
