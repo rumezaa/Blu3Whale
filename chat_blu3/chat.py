@@ -1,7 +1,7 @@
-import firebase_admin
+
 import json
 import requests
-from firebase import firebase
+
 
 #startig a chat firebase
 class Chat_Data:
