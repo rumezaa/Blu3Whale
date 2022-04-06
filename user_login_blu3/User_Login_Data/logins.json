@@ -5,7 +5,9 @@
             "EMAIL": [
                 "blu3whalebusiness@gmail.com"
             ],
-            "PASSWORD": "123456",
+            "PASSWORD": [
+                "123456"
+            ],
             "GRAPH": true
         }
     ]

@@ -7,6 +7,7 @@ from email.message import EmailMessage
 import kivy
 import kivymd
 import plyer
+import requests
 from kivy import utils
 
 
@@ -156,6 +157,10 @@ class LoginScreen(Screen):
             self.parent.current="Home"
             self.ids.user_password.text = ""
 
+        elif signed_in==False:
+            p = MDDialog(title="Parameter Error", text="the password/username you entered is incorrect")
+            p.open()
+
     #for seeing and unseeing password
     def see_pass(self):
         if self.ids.user_password.password == True:
@@ -203,26 +208,21 @@ class ForgotScreen(Screen):
 class HomeScreen(Screen):
     #info screen
     def info(self):
-
         triggers = MDFloatingActionButton(
-                        type= "large",
                         icon= "alert-decagram-outline",
                         md_bg_color= utils.get_color_from_hex("#ffffa1"))
         community = MDFloatingActionButton(
-                        type= "large",
                         icon= "account-heart",
                         md_bg_color= utils.get_color_from_hex("#efc5b1"),
                         )
 
         whale = MDFloatingActionButton(
-                        type= "large",
                         icon= "human-male-child",
                         md_bg_color= utils.get_color_from_hex("#BABAFF"))
 
         triggers.bind(on_press=lambda x: self.trigs())
         community.bind(on_press = lambda x: self.community())
         whale.bind(on_press = lambda x: self.whale())
-
 
 
         d = MDDialog(title="Library",buttons=[triggers,community,whale])
@@ -492,31 +492,26 @@ class Make_Tracker(Screen):
 
 #screen for giving feedback
 class FeedBack(Screen):
-    def feedback(self,user):
+    def feedback(self):
 
-        #email response
-        my_email = "blu3whalebusiness@gmail.com"
-        my_pass = os.environ['my_pass']
-        msg_stuff = self.ids.feedback.text
+        try:
+            #email response
+            msg_stuff = self.ids.feedback.text
 
-        msg = EmailMessage()
-        msg['Subject'] = f'Feedback from {user}'
-        msg['From'] = my_email
-        msg['To'] = my_email
+            url = "https://blu3whale-default-rtdb.firebaseio.com/.json"
 
-        msg.set_content(msg_stuff)
+            #sending the feedback
+            requests.post(url = url, json = {'user':msg_stuff})
 
+            self.ids.feedback.text=""
+            d = MDDialog(title="Feedback sent!", text="please contact blu3whalebusiness@gmail.com\nfor any pressing concerns")
+            d.open()
 
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=120) as mail:
-            mail.starttls()
-            mail.login(user=my_email, password=my_pass)
-            mail.send_message(msg)
+        except:
+            b = MDDialog(title = "There was an Error Processing Your Request")
+            b.open()
 
-        self.ids.feedback.text=""
-        d = MDDialog(text="feedback sent!")
-        d.open()
-
-#for lettign user create personal notes
+#for letting user create personal notes
 class Note(Screen):
     def load_notes(self,username):
         try:

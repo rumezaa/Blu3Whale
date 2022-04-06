@@ -1,7 +1,11 @@
 import nltk
 import sqlite3 as sql
+import nltk
+from nltk.downloader import Downloader
 from nltk.sentiment import SentimentIntensityAnalyzer
 from datetime import datetime
+
+Downloader().download('vader_lexicon.txt')
 
 class WellnessTrack:
     def __init__(self,username):
