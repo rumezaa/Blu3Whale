@@ -1,7 +1,6 @@
 #mainimports
-
-import json
 import os
+import json
 import kivy
 import kivymd
 import plyer
@@ -370,7 +369,7 @@ class HomeScreen(Screen):
         try:
             WellnessTrack(user).update_DB(cat_1,cat_2,cat_3,cat_4)
         except:
-            d = MDDialog(title="invalid data inputted", text="please enter your data as a number or yes/no (excluding the mood)")
+            d = MDDialog(text="invalid data inputted")
             d.open()
         self.ids.create_graph.clear_widgets()
         self.show_tracker(user)
@@ -495,8 +494,7 @@ class FeedBack(Screen):
         try:
             #email response
             msg_stuff = self.ids.feedback.text
-
-            url = "https://blu3whale-default-rtdb.firebaseio.com/.json"
+            url = "https://blu3whalefeedback-5d325-default-rtdb.firebaseio.com/.json"
 
             #sending the feedback
             requests.post(url = url, json = {'user':msg_stuff})
