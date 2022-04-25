@@ -1,0 +1,14 @@
+please enter the following commands to make sure that you can properly run the app.
+(ensure python 3.9 or below is installed)
+NOTE: this is v2 of blu3whale after recieving feedback
+
+commands:
+
+pip install kivy
+pip install kivymd
+pip install plyer
+pip install nltk
+python -m nltk.downloader vader_lexicon
+
+
+EMAIL rumeza06@gmail.com for further concerns
