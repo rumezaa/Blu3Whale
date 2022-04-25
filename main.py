@@ -369,7 +369,7 @@ class HomeScreen(Screen):
         try:
             WellnessTrack(user).update_DB(cat_1,cat_2,cat_3,cat_4)
         except:
-            d = MDDialog(text="invalid data inputted")
+            d = MDDialog(title="invalid data inputted", text="please enter your data as a number or yes/no (excluding the mood)")
             d.open()
         self.ids.create_graph.clear_widgets()
         self.show_tracker(user)
