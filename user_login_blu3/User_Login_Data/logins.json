@@ -1,13 +1,11 @@
 {
     "Logins": [
         {
-            "USERNAME": "test_user",
+            "USERNAME": "blu3whale",
             "EMAIL": [
-                "blu3whalebusiness@gmail.com"
+                "blu3whalebussiness@gmail.com"
             ],
-            "PASSWORD": [
-                "123456"
-            ],
+            "PASSWORD": "blu3",
             "GRAPH": true
         }
     ]
