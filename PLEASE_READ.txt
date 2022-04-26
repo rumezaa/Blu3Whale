@@ -1,4 +1,4 @@
-please enter the following commands to make sure that you can properly run the app.
+please enter the following commands in terminal (mac) or command prompt (windows) to make sure that you can properly run the app.
 (ensure python 3.9 or below is installed)
 NOTE: this is v2 of blu3whale after recieving feedback
 
